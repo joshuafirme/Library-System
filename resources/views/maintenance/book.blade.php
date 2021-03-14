@@ -31,7 +31,7 @@
               <div class="row">
       
                 <div class="col-sm-2 col-md-2 col-lg-10 mb-3">
-                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addProductModal" id="btn-add-product"><span class='fa fa-plus'></span> Add book</button> 
+                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addBookModal" id="btn-add-product"><span class='fa fa-plus'></span> Add book</button> 
       
                   </div>
       
@@ -72,6 +72,10 @@
               </div>
       
 </div>
+
+@extends('layouts.modals.book-modal')
+@section('modals')
+@endsection
 
 @endsection
 

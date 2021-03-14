@@ -20,3 +20,4 @@ Route::get('/login', 'LoginCtr@index');
 Route::get('/dashboard', 'DashboardCtr@index');
 
 Route::get('/book-maintenance', 'Maintenance\BookCtr@index');
+Route::post('/book-maintenance/store', 'Maintenance\BookCtr@store');
