@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::get('/login', 'LoginCtr@index');
 
 Route::get('/dashboard', 'DashboardCtr@index');
+
+Route::get('/book-maintenance', 'Maintenance\BookCtr@index');
