@@ -39,14 +39,14 @@
             <div class="col-4 mb-2">    
               <label class="col-form-label">Category</label>
               <select class="form-control" name="category" id="category">
-         
+                  <option value=1>Test</option>
               </select>
             </div>
 
             <div class="col-4">    
                 <label class="col-form-label">Sub category</label>
                 <select class="form-control" name="sub_category" id="sub_category">
-           
+                  <option value=1>Test</option>
                 </select>
               </div>
 
@@ -77,12 +77,12 @@
 
               <div class="col-4">
                 <label class="col-form-label">Date Acquire</label>
-                <input type="number" class="form-control" name="date_acq" required>
+                <input type="date" class="form-control" name="date_acq" required>
               </div>
 
               <div class="col-4">
                 <label class="col-form-label">Date published</label>
-                <input type="number" class="form-control" name="date_published" required>
+                <input type="date" class="form-control" name="date_published" required>
               </div>
 
           </div>
