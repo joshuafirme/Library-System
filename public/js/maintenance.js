@@ -1,5 +1,37 @@
 $(document).ready(function()
 {
+
+    fetchData();
+
+    function fetchData(){
+        $('#book-table').DataTable({
+        
+           processing: true,
+           serverSide: true,
+          
+           ajax:"/book-maintenance",
+               
+           columns:[       
+            {data: 'accession_no', name: 'accession_no'},
+            {data: 'author', name: 'author'},
+            {data: 'publisher', name: 'publisher'},
+            {data: 'category', name: 'category'},
+            {data: 'classification', name: 'classification'},
+            {data: 'edition', name: 'editiono'},
+            {data: 'no_of_pages', name: 'no_of_pages'},
+            {data: 'amount_if_lost', name: 'amount_if_lost'},
+            {data: 'cost', name: 'cost'},
+            {data: 'date_acq', name: 'date_acq'},
+            {data: 'date_published', name: 'date_published'},
+            {data: 'action', name: 'action', orderable:false},
+           ]
+
+          });
+    
+       }
+
+
+
     $(document).on('click', '#btn-edit-category', function()
     {     
         let id = $(this).attr('category-id');
@@ -21,7 +53,7 @@ $(document).ready(function()
            });
     }
 
-    
+
     let category = $('#category').find("option:selected").text();
     getClassification(category);
 
@@ -41,7 +73,7 @@ $(document).ready(function()
                 $('#classification').empty();
                 for (var i = 0; i < data.length; i++) 
                 {
-                    $('#classification').append('<option value="' + data[i].classification + '">' + data[i].classification + '</option>');
+                    $('#classification').append('<option value="' + data[i].id + '">' + data[i].classification + '</option>');
                 }
             }
            });

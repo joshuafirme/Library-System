@@ -31,7 +31,7 @@
               <div class="row">
       
                 <div class="col-sm-2 col-md-2 col-lg-10 mb-3">
-                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addBookModal" id="btn-add-product"><span class='fa fa-plus'></span> Add book</button> 
+                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addBookModal"><span class='fa fa-plus'></span> Add book</button> 
       
                   </div>
       
@@ -40,7 +40,7 @@
       
                 <div class="card">
                   <div class="card-body">  
-                          <table class="table table-data responsive  table-hover" id="product-table" width="100%">                               
+                          <table class="table table-data responsive  table-hover" id="book-table" width="100%">                               
                             <thead>
                               <tr>
                                   {{--<th><input type="checkbox" name="select_all" value="1" id="select-all-product"></th>--}}

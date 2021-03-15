@@ -58,7 +58,7 @@
 
               <div class="col-4 mb-2">
                 <label class="col-form-label">Number of copies</label>
-                <input type="number" class="form-control" name="no_of_copies" required>
+                <input type="number" class="form-control" name="copies" required>
               </div>
 
               <div class="col-4">
