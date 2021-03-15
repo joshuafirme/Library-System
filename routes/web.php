@@ -28,7 +28,9 @@ Route::get('/dashboard', 'DashboardCtr@index');
 Route::get('/book-maintenance', 'Maintenance\BookCtr@index');
 Route::post('/book-maintenance/store', 'Maintenance\BookCtr@store');
 Route::post('/book-maintenance/update', 'Maintenance\BookCtr@update');
+Route::get('/book-details/{id}', 'Maintenance\BookCtr@getBookDetails');
 Route::post('/book-maintenance/weed/{book_id}', 'Maintenance\BookCtr@weed');
+Route::get('/getAccessionNo_ajax', 'Maintenance\BookCtr@getAccessionNo_ajax');
 
 Route::get('/category-maintenance', 'Maintenance\CategoryCtr@index');
 Route::post('/category-maintenance/store', 'Maintenance\CategoryCtr@store');
