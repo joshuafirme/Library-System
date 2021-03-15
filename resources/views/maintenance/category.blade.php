@@ -1,10 +1,10 @@
-@extends('layouts.main')
+@extends('layouts.maintenance-layout')
 
 @section('content')
 
 <div class="container-fluid">
     <div class="page-header">
-        <h3 class="mt-2" id="page-title">Sub Category Maintenance</h3>
+        <h3 class="mt-2" id="page-title">Category Maintenance</h3>
                 <hr>
             </div>
       
@@ -31,29 +31,31 @@
               <div class="row">
       
                 <div class="col-sm-2 col-md-2 col-lg-10 mb-3">
-                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addSubCategoryModal" id="btn-add-product"><span class='fa fa-plus'></span> Add sub category</button> 
+                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addCategoryModal"><span class='fa fa-plus'></span> Add category</button> 
       
                   </div>
       
-                <div class="col-md-12 col-lg-12">
+                <div class="col-lg-12">
         
       
                 <div class="card">
                   <div class="card-body"> 
                       
-                    @if($subcategory->count() > 0) 
+                    @if($category->count() > 0) 
                         <table class="table table-data responsive  table-hover" width="100%">                               
                             <thead>
                             <tr>
-                                <th>Sub category</th>
+                                <th>Category</th>
+                                <th>Classification</th>
                                 <th style="width: 100px;">Action</th>
                             </tr>
                             </thead>
-                            @foreach ($subcategory as $data)
+                            @foreach ($category as $data)
                             <tbody>
-                                <td>{{ $data->sub_category }}</td>
+                                <td>{{ $data->category }}</td>
+                                <td>{{ $data->classification }}</td>
                                 <td>
-                                    <a class="btn btn-sm" id="btn-edit-subcategory" sub-category-id="{{ $data->id }}" data-toggle="modal" data-target="#editSubCategoryModal"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-sm" id="btn-edit-category" category-id="{{ $data->id }}" data-toggle="modal" data-target="#editCategoryModal"><i class="fa fa-edit"></i></a>
                                 </td>
                             </tbody>
                             @endforeach
@@ -74,18 +76,10 @@
       
 </div>
 
-@extends('layouts.modals.sub-category-modal')
+@extends('layouts.modals.category-modal')
 @section('modals')
 @endsection
 
 @endsection
 
-
-
-<script>
-    $('#btn-edit-subcategory').click( function(){
-        $id = $(this).attr('sub-category-id');
-        alert($id)
-    });
- </script>
 

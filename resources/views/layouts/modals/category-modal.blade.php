@@ -1,24 +1,29 @@
-<!--Add product Modal-->
+<!--Add  Modal-->
 @yield('modals')
-<div class="modal fade" id="addSubCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Add sub category</h4>
+        <h4 class="modal-title" id="exampleModalLabel">Add category</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
-        <form action="{{ action('Maintenance\SubCategoryCtr@store') }}" method="POST">
+        <form action="{{ action('Maintenance\CategoryCtr@store') }}" method="POST">
           @csrf      
           <div class="row">
 
-            <div class="col-12">
-                <label class="col-form-label">Sub category</label>
-                <input type="text" class="form-control" name="sub_category" required>
-            </div>
+            <div class="col-12 mb-2">
+                <label class="col-form-label">Category</label>
+                <input type="text" class="form-control" name="category" required>
+              </div>
+  
+              <div class="col-12 mb-2">
+                <label class="col-form-label">Classification</label>
+                <input type="text" class="form-control" name="classification" required>
+              </div>
 
           </div>
 
@@ -26,31 +31,38 @@
       <div class="modal-footer">
 
               <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-sm btn-primary" id="btn-add-product">Save</button>
+              <button type="submit" class="btn btn-sm btn-primary">Save</button>
       </div>
     </form>
     </div>
   </div>
 </div>
-
-<div class="modal fade" id="editSubCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--Edit Modal-->
+<div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Edit sub category</h4>
+        <h4 class="modal-title" id="exampleModalLabel">Edit category</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
-        <form action="{{ action('Maintenance\SubCategoryCtr@update') }}" method="POST">
+        <form action="{{ action('Maintenance\CategoryCtr@update') }}" method="POST">
           @csrf      
           <div class="row">
+            
+            <input type="hidden" name="id_hidden" id="id_hidden">
 
             <div class="col-12">
-                <label class="col-form-label">Sub category</label>
-                <input type="text" class="form-control" name="sub_category" required>
+                <label class="col-form-label">Category</label>
+                <input type="text" class="form-control" name="category" id="category" required>
+            </div>
+
+            <div class="col-12">
+                <label class="col-form-label">Classification</label>
+                <input type="text" class="form-control" name="classification" id="classification" required>
             </div>
 
           </div>

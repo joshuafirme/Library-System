@@ -32,7 +32,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ url('/book-maintenance') }}">Book</a>
                 <a class="collapse-item" href="{{ url('/category-maintenance') }}">Category</a>
-                <a class="collapse-item" href="{{ url('/sub-category-maintenance') }}">Sub category</a>
                 <a class="collapse-item" href="cards.html">Weed book</a>
                 <a class="collapse-item" href="cards.html">Penalty</a>
             </div>

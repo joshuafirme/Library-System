@@ -19,6 +19,7 @@ Route::get('/login', 'LoginCtr@index');
 
 Route::get('/dashboard', 'DashboardCtr@index');
 
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance
@@ -29,6 +30,8 @@ Route::post('/book-maintenance/store', 'Maintenance\BookCtr@store');
 Route::post('/book-maintenance/update', 'Maintenance\BookCtr@update');
 Route::post('/book-maintenance/weed/{book_id}', 'Maintenance\BookCtr@weed');
 
-Route::get('/sub-category-maintenance', 'Maintenance\SubCategoryCtr@index');
-Route::post('/sub-category-maintenance/store', 'Maintenance\SubCategoryCtr@store');
-Route::post('/sub-category-maintenance/update', 'Maintenance\SubCategoryCtr@update');
+Route::get('/category-maintenance', 'Maintenance\CategoryCtr@index');
+Route::post('/category-maintenance/store', 'Maintenance\CategoryCtr@store');
+Route::post('/category-maintenance/update', 'Maintenance\CategoryCtr@update');
+Route::get('/category-maintenance/get-cat/{id}', 'Maintenance\CategoryCtr@getCategoryDetails');
+Route::get('/get-classification/{category}', 'Maintenance\CategoryCtr@getClassification');

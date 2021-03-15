@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.maintenance-layout')
 
 @section('content')
 
@@ -44,17 +44,18 @@
                             <thead>
                               <tr>
                                   {{--<th><input type="checkbox" name="select_all" value="1" id="select-all-product"></th>--}}
-                                  <th>Product Code</th>
-                                  <th>Description</th> 
-                                  <th>Category</th>   
-                                  <th>Unit</th> 
-                                  <th>Supplier</th>          
-                                  <th>Quantity</th>
-                                  <th>Reorder</th>
-                                  <th>Original Price</th>
-                                  <th>Selling Price</th>
-                                  <th>Expiration</th>
-                                  <th style="width: 100px;">Action</th>
+                                  <th>Accession Number</th>
+                                  <th>Author</th>   
+                                  <th>Publisher</th> 
+                                  <th>Category</th>          
+                                  <th>Sub Category</th>
+                                  <th>Edition</th>
+                                  <th>No of Pages</th>
+                                  <th>Amount if lost</th>
+                                  <th>Cost</th>
+                                  <th>Date acquired</th>
+                                  <th>Date published</th>
+                                  <th>Action</th>
                               </tr>
                           </thead>
                           

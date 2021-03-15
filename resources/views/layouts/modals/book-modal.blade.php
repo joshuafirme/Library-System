@@ -39,14 +39,15 @@
             <div class="col-4 mb-2">    
               <label class="col-form-label">Category</label>
               <select class="form-control" name="category" id="category">
-                  <option value=1>Test</option>
+                  @foreach ($category as $data)
+                     <option value={{ $data->id }}>{{ $data->category }}</option>
+                  @endforeach
               </select>
             </div>
 
             <div class="col-4">    
-                <label class="col-form-label">Sub category</label>
-                <select class="form-control" name="sub_category" id="sub_category">
-                  <option value=1>Test</option>
+                <label class="col-form-label">Classification</label>
+                <select class="form-control" name="classification" id="classification">
                 </select>
               </div>
 
