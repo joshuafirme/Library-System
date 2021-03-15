@@ -37,3 +37,6 @@ Route::post('/category-maintenance/store', 'Maintenance\CategoryCtr@store');
 Route::post('/category-maintenance/update', 'Maintenance\CategoryCtr@update');
 Route::get('/category-maintenance/get-cat/{id}', 'Maintenance\CategoryCtr@getCategoryDetails');
 Route::get('/get-classification/{category}', 'Maintenance\CategoryCtr@getClassification');
+
+Route::get('/penalty-maintenance', 'Maintenance\PenaltyCtr@index');
+Route::post('/penalty-maintenance/activate', 'Maintenance\PenaltyCtr@activate');
