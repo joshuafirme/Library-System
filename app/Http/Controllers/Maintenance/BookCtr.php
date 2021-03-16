@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Maintenance;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Input;
-use DB;
+use Input, DB, Excel;
 
 class BookCtr extends Controller
 {
@@ -34,8 +33,11 @@ class BookCtr extends Controller
                 ->select('B.*', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no,category,classification, copies'))
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
                 ->leftJoin('tbl_book_copies AS BC', 'BC.book_id', '=', 'B.id')
+                ->where('is_weed', 0)
                 ->get();
     }
+
+    
 
     public function store()
     {
@@ -157,5 +159,42 @@ class BookCtr extends Controller
     {
        $categories = DB::table('tbl_category')->get();
        return $categories->unique('category');
+    }
+
+
+    function import(Request $request)
+    {
+     $this->validate($request, [
+      'excel_file'  => 'required|mimes:xls,xlsx'
+     ]);
+
+     $path = $request->file('excel_file')->getRealPath();
+
+     $data = Excel::load($path)->get();
+
+     if($data->count() > 0)
+     {
+      foreach($data->toArray() as $key => $value)
+      {
+       foreach($value as $row)
+       {
+        $insert_data[] = array(
+         'author'  => $row['author'],
+         'title'   => $row['title'],
+         'edition'   => $row['edition'],
+         'no_of_pages'    => $row['no_of_pages'],
+         'publisher'  => $row['publisher'],
+         'date_published'   => $row['date_published'],
+         'cost'  => $row['cost']
+        );
+       }
+      }
+
+      if(!empty($insert_data))
+      {
+       DB::table('tbl_customer')->insert($insert_data);
+      }
+     }
+     return back()->with('success', 'Excel Data Imported successfully.');
     }
 }

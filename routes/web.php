@@ -27,6 +27,7 @@ Route::get('/dashboard', 'DashboardCtr@index');
 */
 Route::get('/book-maintenance', 'Maintenance\BookCtr@index');
 Route::post('/book-maintenance/store', 'Maintenance\BookCtr@store');
+Route::post('/book-maintenance/import', 'Maintenance\BookCtr@import');
 Route::post('/book-maintenance/update', 'Maintenance\BookCtr@update');
 Route::get('/book-details/{id}', 'Maintenance\BookCtr@getBookDetails');
 Route::post('/book-maintenance/weed/{book_id}', 'Maintenance\BookCtr@weed');
@@ -37,6 +38,8 @@ Route::post('/category-maintenance/store', 'Maintenance\CategoryCtr@store');
 Route::post('/category-maintenance/update', 'Maintenance\CategoryCtr@update');
 Route::get('/category-maintenance/get-cat/{id}', 'Maintenance\CategoryCtr@getCategoryDetails');
 Route::get('/get-classification/{category}', 'Maintenance\CategoryCtr@getClassification');
+
+Route::get('/weed-maintenance', 'Maintenance\WeedBookCtr@index');
 
 Route::get('/penalty-maintenance', 'Maintenance\PenaltyCtr@index');
 Route::post('/penalty-maintenance/activate', 'Maintenance\PenaltyCtr@activate');

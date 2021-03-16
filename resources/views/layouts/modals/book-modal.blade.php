@@ -199,6 +199,32 @@
   </div>
 </div>
 
+  <!--ImportModal-->
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title">Import</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+        <div class="modal-body">
+          
+          <form action="{{ action('Maintenance\BookCtr@import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+              <input type="file" name="excel_file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-sm btn-success">Import</button>
+              <button class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+    </div>
+  </div>
+</div>
+
 
   <!--Confirm Modal-->
   <div class="modal fade" id="proconfirmModal" tabindex="-1" role="dialog">

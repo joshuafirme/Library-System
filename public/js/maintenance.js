@@ -1,9 +1,9 @@
 $(document).ready(function()
 {
 
-    fetchData();
+    fetchBooks();
 
-    function fetchData(){
+    function fetchBooks(){
         $('#book-table').DataTable({
         
            processing: true,
@@ -13,14 +13,13 @@ $(document).ready(function()
                
            columns:[       
             {data: 'accession_no', name: 'accession_no'},
+            {data: 'title', name: 'title'},
             {data: 'author', name: 'author'},
             {data: 'publisher', name: 'publisher'},
             {data: 'category', name: 'category'},
             {data: 'classification', name: 'classification'},
             {data: 'edition', name: 'edition'},
-            {data: 'no_of_pages', name: 'no_of_pages'},
-            {data: 'amount_if_lost', name: 'amount_if_lost'},
-            {data: 'cost', name: 'cost'},
+            {data: 'copies', name: 'copies'},
             {data: 'date_acq', name: 'date_acq'},
             {data: 'date_published', name: 'date_published'},
             {data: 'action', name: 'action', orderable:false},
@@ -29,6 +28,36 @@ $(document).ready(function()
           });
     
        }
+
+       fetchWeedBooks();
+
+       function fetchWeedBooks(){
+           $('#weed-table').DataTable({
+           
+              processing: true,
+              serverSide: true,
+             
+              ajax:"/weed-maintenance",
+                  
+              columns:[       
+               {data: 'accession_no', name: 'accession_no'},
+               {data: 'title', name: 'title'},
+               {data: 'author', name: 'author'},
+               {data: 'publisher', name: 'publisher'},
+               {data: 'category', name: 'category'},
+               {data: 'classification', name: 'classification'},
+               {data: 'edition', name: 'edition'},
+               {data: 'copies', name: 'copies'},
+               {data: 'amount_if_lost', name: 'amount_if_lost'},
+               {data: 'cost', name: 'cost'},
+               {data: 'date_acq', name: 'date_acq'},
+               {data: 'date_published', name: 'date_published'},
+               {data: 'action', name: 'action',orderable:false},
+              ]
+   
+             });
+       
+          }
 
        $(document).on('click', '#btn-add-book', function()
        {     
