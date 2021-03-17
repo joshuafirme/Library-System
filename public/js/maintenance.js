@@ -48,8 +48,6 @@ $(document).ready(function()
                {data: 'classification', name: 'classification'},
                {data: 'edition', name: 'edition'},
                {data: 'copies', name: 'copies'},
-               {data: 'amount_if_lost', name: 'amount_if_lost'},
-               {data: 'cost', name: 'cost'},
                {data: 'date_acq', name: 'date_acq'},
                {data: 'date_published', name: 'date_published'},
                {data: 'action', name: 'action',orderable:false},
@@ -81,6 +79,18 @@ $(document).ready(function()
        {     
            let id = $(this).attr('book-id');
            getBookDetails(id);
+       });
+
+       $(document).on('click', '#btn-weed-book', function()
+       {     
+           let id = $(this).attr('book-id');
+           $('#id_weed').val(id);
+       });
+
+       $(document).on('click', '#btn-retrieve-book', function()
+       {     
+           let id = $(this).attr('book-id');
+           $('#id_retrieve').val(id);
        });
    
        function getBookDetails(id)

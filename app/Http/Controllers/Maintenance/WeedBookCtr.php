@@ -14,7 +14,7 @@ class WeedBookCtr extends Controller
         {
             return datatables()->of($this->getWeedBooks())
             ->addColumn('action', function($b){
-                $button = ' <a class="btn btn-sm btn-primary" id="btn-edit-book" book-id="'. $b->id .'" 
+                $button = ' <a class="btn btn-sm btn-primary" id="btn-retrieve-book" book-id="'. $b->id .'" 
                 data-toggle="modal" data-target="#retrieveBookModal"><i class="fa fa-recycle"></i></a>';
                 return $button;
             })
@@ -33,5 +33,17 @@ class WeedBookCtr extends Controller
                 ->leftJoin('tbl_book_copies AS BC', 'BC.book_id', '=', 'B.id')
                 ->where('is_weed', 1)
                 ->get();
+    }
+
+    public function retrieve()
+    {
+        $data = Input::all();
+        DB::table('tbl_books')
+            ->where('id', $data['id_retrieve'])
+            ->update([
+                'is_weed' => 0
+            ]);
+
+        return redirect('/weed-maintenance')->with('success', 'Book was retrieve successfully');
     }
 }

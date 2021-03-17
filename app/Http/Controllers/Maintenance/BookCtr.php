@@ -16,6 +16,10 @@ class BookCtr extends Controller
             ->addColumn('action', function($b){
                 $button = ' <a class="btn btn-sm btn-primary" id="btn-edit-book" book-id="'. $b->id .'" 
                 data-toggle="modal" data-target="#editBookModal"><i class="fa fa-edit"></i></a>';
+
+                $button .= ' <a class="btn btn-sm btn-danger" id="btn-weed-book" book-id="'. $b->id .'" 
+                data-toggle="modal" data-target="#weedModal"><i class="fa fa-archive"></i></a>';
+
                 return $button;
             })
             ->rawColumns(['action'])
@@ -131,7 +135,9 @@ class BookCtr extends Controller
 
     public function weed()
     {
+        $data = Input::all();
         DB::table('tbl_books')
+            ->where('id', $data['id_weed'])
             ->update([
                 'is_weed' => 1
             ]);

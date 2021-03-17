@@ -19,7 +19,23 @@
             <span>Dashboard</span></a>
     </li>
 
-
+    <!-- Nav Item - Transaction Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Transaction"
+            aria-expanded="true" aria-controls="Transaction">
+            <i class="fas fa-book"></i>
+            <span>Transaction</span>
+        </a>
+        <div id="Transaction" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ url('/book-search') }}">Book Search</a>
+                <a class="collapse-item" href="{{ url('/category-maintenance') }}">Reserve</a>
+                <a class="collapse-item" href="{{ url('/weed-maintenance') }}">Approve</a>
+                <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Borrow</a>
+                <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Return</a>
+            </div>
+        </div>
+    </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
@@ -48,11 +64,9 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
+                <a class="collapse-item" href="{{ url('/user-maintenance') }}">User Maintenance</a>
+                <a class="collapse-item" href="utilities-border.html">Audit Trail</a>
+                <a class="collapse-item" href="utilities-border.html">Archive</a>
             </div>
         </div>
     </li>
