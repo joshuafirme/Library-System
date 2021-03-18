@@ -34,9 +34,8 @@ class BookCtr extends Controller
     public function getBooks()
     {
        return DB::table('tbl_books AS B')
-                ->select('B.*', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no,category,classification, copies'))
+                ->select('B.*', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no,category,classification'))
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
-                ->leftJoin('tbl_book_copies AS BC', 'BC.book_id', '=', 'B.id')
                 ->where('is_weed', 0)
                 ->get();
     }
@@ -55,6 +54,7 @@ class BookCtr extends Controller
                     'accession_no' => $this->getAccessionNo(),
                     'title' => $data['title'],
                     'author' => $data['author'],
+                    'copies' => $data['copies'],
                     'publisher' => $data['publisher'],
                     'category_id' => $category_id,
                     'edition' => $data['edition'],
@@ -65,19 +65,10 @@ class BookCtr extends Controller
                     'date_published' => $data['date_published'],
                     'is_weed' => 0
                 ]);
-        $this->storeBookCopies($id, $data['copies']);
 
         return redirect('/book-maintenance')->with('success', 'Data Saved');
     }
 
-    public function storeBookCopies($id, $copies)
-    {
-        DB::table('tbl_book_copies')
-        ->insert([
-            'book_id' => $id,
-            'copies' => $copies
-        ]);
-    }
 
     public function getCategoryID($category, $classification)
     {
@@ -90,9 +81,8 @@ class BookCtr extends Controller
     public function getBookDetails($id)
     {
         return DB::table('tbl_books AS B')
-                ->select('B.*', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no, category, classification, copies'))
+                ->select('B.*', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no, category, classification'))
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
-                ->leftJoin('tbl_book_copies AS BC', 'BC.book_id', '=', 'B.id')
                 ->where('B.id', $id)
                 ->get();
     }
@@ -109,6 +99,7 @@ class BookCtr extends Controller
                 'title' => $data['title'],
                 'author' => $data['author'],
                 'publisher' => $data['publisher'],
+                'copies' => $data['copies'],
                 'category_id' => $category_id,
                 'edition' => $data['edition'],
                 'no_of_pages' => $data['no_of_pages'],
@@ -119,19 +110,10 @@ class BookCtr extends Controller
                 'is_weed' => 0
             ]);
 
-        $this->updateBookCopies($data['id_hidden'], $data['copies']);
 
         return redirect('/book-maintenance')->with('success', 'Data updated successfully');
     }
 
-    public function updateBookCopies($id, $copies)
-    {
-        DB::table('tbl_book_copies')
-        ->where('book_id', $id)
-        ->update([
-            'copies' => $copies
-        ]);
-    }
 
     public function weed()
     {

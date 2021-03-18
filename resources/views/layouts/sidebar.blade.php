@@ -35,7 +35,7 @@
             <div id="Transaction" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{ url('/book-search') }}">Book Search</a>
-                    <a class="collapse-item" href="{{ url('/category-maintenance') }}">Reserve</a>
+                    <a class="collapse-item" href="{{ url('/reserve-book') }}">Reserve</a>
                     <a class="collapse-item" href="{{ url('/weed-maintenance') }}">Approve</a>
                     <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Borrow</a>
                     <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Return</a>
@@ -89,7 +89,7 @@
             <span>Book Search</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ url('/reserve-book') }}">
             <i class="fas fa-fw fa-bookmark"></i>
             <span>Reserve</span></a>
     </li>

@@ -55,6 +55,8 @@ Route::post('/penalty-maintenance/activate', 'Maintenance\PenaltyCtr@activate');
 */
 Route::get('/book-search', 'Transaction\BookSearchCtr@index');
 
+Route::get('/reserve-book', 'Transaction\ReserveCtr@index');
+
 /*
 |--------------------------------------------------------------------------
 | Utilities

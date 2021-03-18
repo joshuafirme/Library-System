@@ -106,6 +106,7 @@
     <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
     <script src="{{asset('js/transaction/book-search.js')}}"></script>
+    <script src="{{asset('js/transaction/reserve.js')}}"></script>
 
 </body>
 
