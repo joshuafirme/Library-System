@@ -51,3 +51,12 @@ Route::post('/penalty-maintenance/activate', 'Maintenance\PenaltyCtr@activate');
 |--------------------------------------------------------------------------
 */
 Route::get('/book-search', 'Transaction\BookSearchCtr@index');
+
+/*
+|--------------------------------------------------------------------------
+| Utilities
+|--------------------------------------------------------------------------
+*/
+Route::get('/user-maintenance', 'Utilities\UserCtr@index');
+Route::get('/display-student', 'Utilities\UserCtr@displayStudent');
+Route::post('/user-maintenance/store', 'Utilities\UserCtr@store');

@@ -1,4 +1,10 @@
+{{--<img width="1500" height="70"  src="{{asset('img/banner.jpg')}}" alt="" style="margin-left: -40px">--}}
 <ul class="navbar-nav ml-auto">
+
+     <!-- Nav Item - User Information -->
+     <li class="nav-item dropdown no-arrow">
+       
+    </li>
 
     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
     <li class="nav-item dropdown no-arrow d-sm-none">
@@ -23,6 +29,7 @@
             </form>
         </div>
     </li>
+
 
     <!-- Nav Item - Alerts -->
     <li class="nav-item dropdown no-arrow mx-1">
