@@ -11,13 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/login', 'LoginCtr@index');
+/*
+|--------------------------------------------------------------------------
+| Login
+|--------------------------------------------------------------------------
+*/
+Route::get('/', 'LoginCtr@index');
 
-Route::get('/dashboard', 'DashboardCtr@index');
+Route::post('/do-login', 'LoginCtr@login');
 
 
 /*
@@ -59,4 +61,8 @@ Route::get('/book-search', 'Transaction\BookSearchCtr@index');
 */
 Route::get('/user-maintenance', 'Utilities\UserCtr@index');
 Route::get('/display-student', 'Utilities\UserCtr@displayStudent');
+Route::get('/display-teacher', 'Utilities\UserCtr@displayTeacher');
 Route::post('/user-maintenance/store', 'Utilities\UserCtr@store');
+Route::post('/user-maintenance/update', 'Utilities\UserCtr@update');
+Route::get('/student-details/{user_id}', 'Utilities\UserCtr@getStudentDetails');
+Route::post('/user-maintenance/archive', 'Utilities\UserCtr@archive');

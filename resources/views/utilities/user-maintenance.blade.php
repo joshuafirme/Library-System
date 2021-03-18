@@ -27,6 +27,14 @@
                 {{ \Session::get('success') }}
               </div>      
               @endif
+
+              @if(\Session::has('danger'))
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-exclamation-triangle"></i> </h5>
+                {{ \Session::get('danger') }}
+              </div>      
+              @endif
       
               <div class="row">
       
@@ -93,11 +101,12 @@
                             <table class="table table-data responsive  table-hover" id="teacher-table" style="width: 100%">                               
                                 <thead>
                                   <tr>
-                                      <th>User name</th>
-                                      <th>Name</th> 
-                                      <th>Contact Number</th> 
-                                      <th>User type</th>  
-                                      <th>Action</th>
+                                    <th>User ID</th>
+                                    <th>Name</th> 
+                                    <th>Department</th> 
+                                    <th>Contact Number</th> 
+                                    <th>Address</th> 
+                                    <th>Action</th>
                                   </tr>
                               </thead>
                               
