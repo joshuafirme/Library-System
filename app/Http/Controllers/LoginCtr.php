@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB, Input, Auth;
+use DB, Input, Auth, Redirect;
 
 class LoginCtr extends Controller
 {
@@ -18,24 +18,16 @@ class LoginCtr extends Controller
 
         if (Auth::attempt(['user_id' => $data['user_id'], 'password' => $data['password']])) 
         {
-            return redirect('/book-search')->send();
+            return Redirect::to('/book-search');
         }
         else{
-            return redirect('/')->with('invalid', 'Invalid User ID or password'); 
+            return Redirect::to('/')->with('invalid', 'Invalid User ID or password'); 
         }
        
     }
-    
-    public function isAccountExists($phone_email)
+    public function logout()
     {
-        $acc =  DB::table($this->tbl_cust_acc)
-        ->where('phone_no', $phone_email)
-        ->orWhere('email', $phone_email)
-        ->get(); 
-        
-        if($acc->count() > 0){
-            return true;
-        }
-
+       Auth::logout();
+       return Redirect::to('/');
     }
 }

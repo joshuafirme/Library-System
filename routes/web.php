@@ -20,6 +20,7 @@
 Route::get('/', 'LoginCtr@index');
 
 Route::post('/do-login', 'LoginCtr@login');
+Route::get('/do-logout', 'LoginCtr@logout');
 
 
 /*

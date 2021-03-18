@@ -129,7 +129,6 @@ $(document).ready(function()
                     $('#contact_no').val(data[0].contact_no);
                     $('#address').val(data[0].address);
                     $('#user_id').val(data[0].user_id);
-                    $('#password').val(data[0].password);
                 }
                });
         }

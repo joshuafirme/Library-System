@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Utilities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB, Input, Hash;
+use DB, Input, Hash, Auth;
 
 class UserCtr extends Controller
 {
@@ -202,16 +202,27 @@ class UserCtr extends Controller
 
     public function updateUser($user_id, $name, $password, $contact, $address, $user_type)
     {
-        DB::table('tbl_users')
-        ->where('user_id', $user_id)
-        ->update([          
-            'name' => $name,
-            'password' => Hash::make($password),
-            'address' => $address,
-            'contact_no' => $contact,
-            'user_type' => $user_type,
-            'archive_status' => 0
-        ]); 
+        if($password){
+            DB::table('tbl_users')
+            ->where('user_id', $user_id)
+            ->update([          
+                'name' => $name,
+                'password' => Hash::make($password),
+                'address' => $address,
+                'contact_no' => $contact,
+                'user_type' => $user_type
+            ]); 
+        }
+        else{
+            DB::table('tbl_users')
+            ->where('user_id', $user_id)
+            ->update([          
+                'name' => $name,
+                'address' => $address,
+                'contact_no' => $contact,
+                'user_type' => $user_type
+            ]); 
+        }
     }
 
     public function archive()
