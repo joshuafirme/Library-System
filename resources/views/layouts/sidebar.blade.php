@@ -25,7 +25,6 @@
             <span>Dashboard</span></a>
     </li>
 
-    <!-- Nav Item - Transaction Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Transaction"
                 aria-expanded="true" aria-controls="Transaction">
@@ -44,7 +43,26 @@
             </div>
         </li>
 
-        <!-- Nav Item - Pages Collapse Menu -->
+         <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reports"
+                aria-expanded="true" aria-controls="reports">
+                <i class="fas fa-fw fa-print"></i>
+                <span>Reports</span>
+            </a>
+            <div id="reports" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ url('/book-maintenance') }}">Borrowed</a>
+                    <a class="collapse-item" href="{{ url('/category-maintenance') }}">Returned</a>
+                    <a class="collapse-item" href="{{ url('/weed-maintenance') }}">Overdue</a>
+                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Unreturned</a>
+                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Loss book</a>
+                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Weed book list</a>
+                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">List of penalty</a>
+                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Visitor's log</a>
+                </div>
+            </div>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
@@ -61,7 +79,6 @@
             </div>
         </li>
 
-        <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
