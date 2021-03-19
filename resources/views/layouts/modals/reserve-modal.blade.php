@@ -62,16 +62,6 @@
                 </div>
   
                 <div class="col-4">
-                  <label class="col-form-label">Amount if lost</label>
-                  <a class="form-control" id="amount_if_lost"></a>
-                </div>
-  
-                <div class="col-4 mb-2">
-                  <label class="col-form-label">Cost</label>
-                  <a class="form-control" id="cost"></a>
-                </div>
-  
-                <div class="col-4">
                   <label class="col-form-label">Date Acquire</label>
                   <a class="form-control" id="date_acq"></a>
                 </div>

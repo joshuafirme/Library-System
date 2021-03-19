@@ -36,7 +36,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{ url('/book-search') }}">Book Search</a>
                     <a class="collapse-item" href="{{ url('/reserve-book') }}">Reserve</a>
-                    <a class="collapse-item" href="{{ url('/weed-maintenance') }}">Approve</a>
+                    <a class="collapse-item" href="{{ url('/approve-reservation') }}">Approve</a>
                     <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Borrow</a>
                     <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Return</a>
                 </div>

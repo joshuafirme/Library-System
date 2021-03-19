@@ -91,4 +91,55 @@ class ReserveCtr extends Controller
             return false;
         }
     }
+
+/*
+|--------------------------------------------------------------------------
+| Approve Reservation
+|--------------------------------------------------------------------------
+*/
+    public function approve_reservation_view()
+    {
+        if(request()->ajax())
+        {
+            return datatables()->of($this->getReservationList())
+            ->addColumn('action', function($r){
+                $button =  '<a class="btn btn-sm btn-success" id="btn-reserve-book" user-id="'. $r->id .'" accession-no="'. $r->accession_no .'"
+                data-toggle="modal" data-target="#reserveBookModal"><i class="fa fa-check-circle"></i></a>';
+
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);      
+        }
+
+        return view('transaction.approve-reservation');
+    }
+
+    public function getReservationList()
+    {
+       return DB::table('tbl_book_reserve AS BR')
+                ->select('BR.*', 'U.user_id', 'U.name', 'B.title')
+                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
+                ->where('BR.is_approve', 0)
+                ->get();
+    }
+
+    
+    public function approveReservation($user_id, $accession_no)
+    {
+        $row = DB::table('tbl_book_reserve')
+                ->where('user_id', $user_id)
+                ->where('accession_no', $accession_no)
+                ->update([
+                    'is_approve', 1
+                ])
+                ->get();
+                
+        if($row->count() == 3){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -54,8 +54,8 @@ $(document).ready(function()
                  $('#edition').text(data[0].edition);
                  $('#no_of_pages').text(data[0].no_of_pages);
                  $('#copies').text(data[0].copies);
-                 $('#amount_if_lost').text(data[0].amount_if_lost);
-                 $('#cost').text(data[0].cost);
+               //  $('#amount_if_lost').text(data[0].amount_if_lost);
+               //  $('#cost').text(data[0].cost);
                  $('#date_acq').text(data[0].date_acq);
                  $('#date_published').text(data[0].date_published);
                }
@@ -82,4 +82,31 @@ $(document).ready(function()
             (month<10 ? '0' : '') + month + '-' +
             (day<10 ? '0' : '') + day;
        }
+
+
+       fetchReservationList();
+
+    function fetchReservationList(){
+        $('#approve-reservation-table').DataTable({
+        
+           processing: true,
+           serverSide: true,
+          
+           ajax:"/approve-reservation",
+               
+           columns:[       
+            {data: 'user_id', name: 'user_id'},
+            {data: 'name', name: 'name'},
+            {data: 'accession_no', name: 'accession_no'},
+            {data: 'title', name: 'title'},
+            {data: 'reservation_date', name: 'reservation_date'},
+            {data: 'action', name: 'action', orderable:false}
+           ]
+
+          });
+    
+    }
+
+
+
 });
