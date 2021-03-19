@@ -91,3 +91,56 @@
     </div>
   </div>
   
+
+
+  <!--Approve Reservation Modal-->
+  <div class="modal fade" id="approveModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure do you want to approve this reservation?</p>
+        </div>
+        <form action="{{ action('Transaction\ReserveCtr@approveReservation') }}" method="POST">
+          @csrf
+        <input type="hidden" id="user_id" name="user_id">
+        <input type="hidden" id="acn_no" name="accession_no">
+        <div class="modal-footer">
+          <button class="btn btn-sm btn-outline-dark" type="submit">Yes</button>
+          <button class="btn btn-sm btn-danger cancel-delete" data-dismiss="modal">Cancel</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Approve Reservation Modal-->
+  <div class="modal fade" id="declineModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure do you want to decline this reservation?</p>
+        </div>
+        <form action="{{ action('Transaction\ReserveCtr@declineReservation') }}" method="POST">
+          @csrf
+        <input type="hidden" id="user_id" name="user_id">
+        <input type="hidden" id="acn_no" name="accession_no">
+        <div class="modal-footer">
+          <button class="btn btn-sm btn-outline-dark" type="submit">Yes</button>
+          <button class="btn btn-sm btn-danger cancel-delete" data-dismiss="modal">Cancel</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>

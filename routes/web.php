@@ -59,6 +59,11 @@ Route::get('/reserve-book', 'Transaction\ReserveCtr@index');
 Route::post('/reserve-book/do-reserve', 'Transaction\ReserveCtr@reserveBook');
 
 Route::get('/approve-reservation', 'Transaction\ReserveCtr@approve_reservation_view');
+Route::post('/approve-reservation/approve', 'Transaction\ReserveCtr@approveReservation');
+Route::post('/approve-reservation/decline', 'Transaction\ReserveCtr@declineReservation');
+
+Route::get('/for-release', 'Transaction\ForReleaseCtr@index');
+Route::post('/for-release/do-release', 'Transaction\ForReleaseCtr@release');
 
 /*
 |--------------------------------------------------------------------------

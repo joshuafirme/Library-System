@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="page-header">
-        <h3 class="mt-2" id="page-title">Approve Reservation</h3>
+        <h3 class="mt-2" id="page-title">For Release</h3>
                 <hr>
             </div>
       
@@ -29,7 +29,7 @@
       
                 <div class="card">
                   <div class="card-body">  
-                          <table class="table table-data responsive  table-hover" id="approve-reservation-table">                               
+                          <table class="table table-data responsive  table-hover" id="for-release-table">                               
                             <thead>
                               <tr>
                                   <th>User ID</th>
@@ -53,7 +53,32 @@
       
 </div>
 
-@include('layouts.modals.reserve-modal')
+  <!--Release Modal-->
+  <div class="modal fade" id="releaseModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure do you want to release this book?</p>
+        </div>
+        <form action="{{ action('Transaction\ForReleaseCtr@release') }}" method="POST">
+          @csrf
+            <input type="hidden" id="user_id" name="user_id">
+            <input type="hidden" id="acn_no" name="accession_no">
+        <div class="modal-footer">
+          <button class="btn btn-sm btn-outline-dark" type="submit">Yes</button>
+          <button class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+      
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 @endsection
 

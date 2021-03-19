@@ -103,8 +103,12 @@ class ReserveCtr extends Controller
         {
             return datatables()->of($this->getReservationList())
             ->addColumn('action', function($r){
-                $button =  '<a class="btn btn-sm btn-success" id="btn-reserve-book" user-id="'. $r->id .'" accession-no="'. $r->accession_no .'"
-                data-toggle="modal" data-target="#reserveBookModal"><i class="fa fa-check-circle"></i></a>';
+                $button =  '<a class="btn btn-sm btn-success mr-2" id="btn-approve" user-id="'. $r->borrower_id .'" accession-no="'. $r->accession_no .'"
+                data-toggle="modal" data-target="#approveModal"><i class="fa fa-check-circle"></i></a>';
+
+                $button .=  '<a class="btn btn-sm btn-danger" id="btn-decline" user-id="'. $r->borrower_id .'" accession-no="'. $r->accession_no .'"
+                data-toggle="modal" data-target="#declineModal"><i class="fa fa-minus-circle"></i></a>';
+
 
                 return $button;
             })
@@ -118,7 +122,7 @@ class ReserveCtr extends Controller
     public function getReservationList()
     {
        return DB::table('tbl_book_reserve AS BR')
-                ->select('BR.*', 'U.user_id', 'U.name', 'B.title')
+                ->select('BR.*', 'U.user_id', 'BR.user_id as borrower_id', 'U.name', 'B.title')
                 ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->where('BR.is_approve', 0)
@@ -126,20 +130,29 @@ class ReserveCtr extends Controller
     }
 
     
-    public function approveReservation($user_id, $accession_no)
+    public function approveReservation()
     {
+        $data = Input::all();
+
         $row = DB::table('tbl_book_reserve')
-                ->where('user_id', $user_id)
-                ->where('accession_no', $accession_no)
+                ->where('user_id', $data['user_id'])
+                ->where('accession_no', $data['accession_no'])
                 ->update([
-                    'is_approve', 1
-                ])
-                ->get();
-                
-        if($row->count() == 3){
-            return true;
-        }else{
-            return false;
-        }
+                    'is_approve' => 1
+                ]);
+
+        return redirect('/approve-reservation')->with('success', 'Reservation was approved');
+    }
+
+    public function declineReservation($user_id, $accession_no)
+    {
+        $data = Input::all();
+
+        $row = DB::table('tbl_book_reserve')
+                ->where('user_id', $data['user_id'])
+                ->where('accession_no', $data['accession_no'])
+                ->update([
+                    'is_approve' => -1
+                ]); 
     }
 }
