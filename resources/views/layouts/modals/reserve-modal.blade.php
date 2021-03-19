@@ -9,11 +9,12 @@
         </div>
         <div class="modal-body">
   
-          <form action="{{ action('Maintenance\BookCtr@store') }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ action('Transaction\ReserveCtr@reserveBook') }}" method="POST">
             @csrf      
             <div class="row">
-              <input type="hidden" id="discount_hidden">
               
+              <input type="hidden" name="accession_no">
+
               <div class="col-6 mb-2">
                 <label class="col-form-label">Accession Number</label>
                 <a class="form-control" id="accession_no"></a>
@@ -84,7 +85,7 @@
 
                 <div class="col-4">
                     <label class="col-form-label">Reservation Date</label>
-                    <input class="form-control" type="date" name="reservation_date" id="reservation_date">
+                    <input class="form-control" type="date" name="reservation_date" id="reservation_date" required>
                 </div>
   
             </div>

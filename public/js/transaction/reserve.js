@@ -42,6 +42,7 @@ $(document).ready(function()
                success:function(data){
                    console.log(data);
                  $('#id_hidden').val(id);
+                 $('input[name=accession_no]').val(data[0].accession_no);
                  $('#accession_no').text(data[0].accession_no);
                  $('#title').text(data[0].title);
                  $('#author').text(data[0].author);
@@ -66,7 +67,7 @@ $(document).ready(function()
        {     
            let res_date = $(this).val();
            if(res_date < getCurrentDate()){
-               alert('You canno reserve that date!');
+               alert('You cannot reserve that date!');
                $('#reservation_date').val(getCurrentDate());
            }
        });
