@@ -54,7 +54,8 @@ class BorrowCtr extends Controller
 
         if(base::hasOneLeftBook($data['accession_no']))
         {
-            return redirect('/borrow-book')->with('danger', 'Cannot borrow! The book only have 1 copy remaining.');
+            //HINDI PA NAGANA
+            return redirect('/borrow-book')->with('danger', 'Borrow denied! The book only have 1 copy remaining.');
         }
         else
         {
