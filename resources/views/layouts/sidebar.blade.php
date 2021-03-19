@@ -37,7 +37,7 @@
                     <a class="collapse-item" href="{{ url('/reserve-book') }}">Reserve</a>
                     <a class="collapse-item" href="{{ url('/approve-reservation') }}">Approve</a>
                     <a class="collapse-item" href="{{ url('/for-release') }}">For Release</a>
-                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Borrow</a>
+                    <a class="collapse-item" href="{{ url('/borrow-book') }}">Borrow</a>
                     <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Return</a>
                 </div>
             </div>

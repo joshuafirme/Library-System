@@ -17,7 +17,6 @@ class ForReleaseCtr extends Controller
                 $button =  '<a class="btn btn-sm btn-success mr-2" id="btn-release" user-id="'. $r->borrower_id .'" accession-no="'. $r->accession_no .'"
                 data-toggle="modal" data-target="#releaseModal"><i class="fa fa-check-circle"></i></a>';
 
-
                 return $button;
             })
             ->rawColumns(['action'])
@@ -55,6 +54,12 @@ class ForReleaseCtr extends Controller
                 'created_at' => date('Y-m-d h:m:s'),
                 'due_date' => date('Y-m-d', strtotime(date('Y-m-d'). ' + 6 days')),
             ]);
+
+            DB::table('tbl_books as B')
+            ->where(DB::raw('CONCAT(B._prefix, B.accession_no)'), $data['accession_no'])
+            ->update([
+                'copies' => DB::raw('copies - 1')
+            ]);     
 
         return redirect('/for-release')->with('success', 'The book was release.');
     }

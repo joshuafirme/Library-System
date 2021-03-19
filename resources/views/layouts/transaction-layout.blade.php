@@ -108,6 +108,7 @@
     <script src="{{asset('js/transaction/book-search.js')}}"></script>
     <script src="{{asset('js/transaction/reserve.js')}}"></script>
     <script src="{{asset('js/transaction/for-release.js')}}"></script>
+    <script src="{{asset('js/transaction/borrow.js')}}"></script>
 
 </body>
 

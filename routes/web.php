@@ -65,6 +65,10 @@ Route::post('/approve-reservation/decline', 'Transaction\ReserveCtr@declineReser
 Route::get('/for-release', 'Transaction\ForReleaseCtr@index');
 Route::post('/for-release/do-release', 'Transaction\ForReleaseCtr@release');
 
+Route::get('/borrow-book', 'Transaction\BorrowCtr@index');
+Route::get('/search-user/{user_id}', 'Transaction\BorrowCtr@searchUser');
+Route::post('/borrow-book/do-borrow', 'Transaction\BorrowCtr@borrow');
+
 /*
 |--------------------------------------------------------------------------
 | Utilities
