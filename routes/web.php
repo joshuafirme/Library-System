@@ -69,6 +69,10 @@ Route::get('/borrow-book', 'Transaction\BorrowCtr@index');
 Route::get('/search-user/{user_id}', 'Transaction\BorrowCtr@searchUser');
 Route::post('/borrow-book/do-borrow', 'Transaction\BorrowCtr@borrow');
 
+Route::get('/return-book', 'Transaction\ReturnCtr@index');
+Route::get('/get-borrowed-details/{user_id}/{accession_no}', 'Transaction\ReturnCtr@getBorrowedDetails');
+Route::post('/return-book/do-return', 'Transaction\ReturnCtr@return');
+
 /*
 |--------------------------------------------------------------------------
 | Utilities

@@ -50,7 +50,7 @@ class ForReleaseCtr extends Controller
             ->insert([
                 'user_id' => $data['user_id'],
                 'accession_no' => $data['accession_no'],
-                'is_returned' => 0,
+                'status' => 0,
                 'is_penalty' => 0,
                 'created_at' => date('Y-m-d h:m:s'),
                 'due_date' => date('Y-m-d', strtotime(date('Y-m-d'). ' + 6 days')),

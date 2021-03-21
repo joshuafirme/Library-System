@@ -69,7 +69,7 @@ class BorrowCtr extends Controller
                         'user_id' => $data['user_id'],
                         'accession_no' => $data['accession_no'],
                         'is_returned' => 0,
-                        'is_penalty' => 0,
+                        'status' => 0,
                         'created_at' => date('Y-m-d h:m:s'),
                         'due_date' => date('Y-m-d', strtotime(date('Y-m-d'). ' + '.$days.' days')),
                     ]);
