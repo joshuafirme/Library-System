@@ -54,7 +54,6 @@ class BorrowCtr extends Controller
 
         if(base::hasOneLeftBook($data['accession_no']))
         {
-            //HINDI PA NAGANA
             return redirect('/borrow-book')->with('danger', 'Borrow denied! The book only have 1 copy remaining.');
         }
         else
@@ -70,6 +69,7 @@ class BorrowCtr extends Controller
                         'user_id' => $data['user_id'],
                         'accession_no' => $data['accession_no'],
                         'is_returned' => 0,
+                        'is_penalty' => 0,
                         'created_at' => date('Y-m-d h:m:s'),
                         'due_date' => date('Y-m-d', strtotime(date('Y-m-d'). ' + '.$days.' days')),
                     ]);
@@ -97,7 +97,7 @@ class BorrowCtr extends Controller
                 ->where('is_returned', 0)
                 ->get();
                 
-        if($row->count() > 3){
+        if($row->count() >= 3){
             return true;
         }else{
             return false;
