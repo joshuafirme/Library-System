@@ -7,27 +7,27 @@ use Illuminate\Http\Request;
 use App\Helpers\base;
 use DB, Input;
 
-class BorrowedReportCtr extends Controller
+class ReturnedReportCtr extends Controller
 {
     public function index(Request $request)
     {
-        $data = $this->getBorrowedBooks($request->date_from, $request->date_to);
+        $data = $this->getReturnedBooks($request->date_from, $request->date_to);
         if(request()->ajax())
         {
             return datatables()->of($data)
             ->make(true);      
         }
 
-        return view('reports.borrowed-report');
+        return view('reports.returned-report');
     }
 
-    public function getBorrowedBooks($date_from, $date_to)
+    public function getReturnedBooks($date_from, $date_to)
     {
        return DB::table('tbl_book_borrowed AS BR')
                 ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title', 'BR.created_at')
                 ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
-                ->where('BR.status', 0)
+                ->where('BR.status', 1)
                 ->whereBetween('BR.created_at', [$date_from, $date_to])
                 ->get();
     }
@@ -35,9 +35,9 @@ class BorrowedReportCtr extends Controller
 
     public function previewReport($date_from, $date_to)
     {
-        $borrowed = $this->getBorrowedBooks($date_from, $date_to);
+        $returned = $this->getReturnedBooks($date_from, $date_to);
 
-        $output = base::convertDataToHTML($borrowed, $date_from, $date_to, 'Borrowed');
+        $output = base::convertDataToHTML($returned, $date_from, $date_to, 'Returned');
     
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($output);

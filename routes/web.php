@@ -81,6 +81,9 @@ Route::post('/return-book/do-return', 'Transaction\ReturnCtr@return');
 Route::get('/borrowed-report', 'Reports\BorrowedReportCtr@index');
 Route::get('/borrowed-report/print/{date_from}/{date_to}', 'Reports\BorrowedReportCtr@previewReport');
 
+Route::get('/returned-report', 'Reports\ReturnedReportCtr@index');
+Route::get('/returned-report/print/{date_from}/{date_to}', 'Reports\ReturnedReportCtr@previewReport');
+
 /*
 |--------------------------------------------------------------------------
 | Utilities
