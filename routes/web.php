@@ -78,6 +78,14 @@ Route::post('/return-book/do-return', 'Transaction\ReturnCtr@return');
 | Utilities
 |--------------------------------------------------------------------------
 */
+Route::get('/borrowed-report', 'Reports\BorrowedReportCtr@index');
+Route::get('/borrowed-report/print/{date_from}/{date_to}', 'Reports\BorrowedReportCtr@previewReport');
+
+/*
+|--------------------------------------------------------------------------
+| Utilities
+|--------------------------------------------------------------------------
+*/
 Route::get('/user-maintenance', 'Utilities\UserCtr@index');
 Route::get('/display-student', 'Utilities\UserCtr@displayStudent');
 Route::get('/display-teacher', 'Utilities\UserCtr@displayTeacher');

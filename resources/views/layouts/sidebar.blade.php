@@ -51,14 +51,14 @@
             </a>
             <div id="reports" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{ url('/book-maintenance') }}">Borrowed</a>
-                    <a class="collapse-item" href="{{ url('/category-maintenance') }}">Returned</a>
-                    <a class="collapse-item" href="{{ url('/weed-maintenance') }}">Overdue</a>
-                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Unreturned</a>
-                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Loss book</a>
-                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Weed book list</a>
-                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">List of penalty</a>
-                    <a class="collapse-item" href="{{ url('/penalty-maintenance') }}">Visitor's log</a>
+                    <a class="collapse-item" href="{{ url('/borrowed-report') }}">Borrowed</a>
+                    <a class="collapse-item" href="{{ url('/returned-report') }}">Returned</a>
+                    <a class="collapse-item" href="{{ url('/overdue-report') }}">Overdue</a>
+                    <a class="collapse-item" href="{{ url('/unreturned-report') }}">Unreturned</a>
+                    <a class="collapse-item" href="{{ url('/loss-report') }}">Loss book</a>
+                    <a class="collapse-item" href="{{ url('/weed-report') }}">Weed book list</a>
+                    <a class="collapse-item" href="{{ url('/list-report') }}">List of penalty</a>
+                    <a class="collapse-item" href="{{ url('/visitor-log-report') }}">Visitor's log</a>
                 </div>
             </div>
         </li>
