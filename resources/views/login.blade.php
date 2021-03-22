@@ -79,7 +79,7 @@ body {
                             </div>
                             <button style="width: 100%" type="submit" class="btn btn-primary shadow-2 mb-4">Login</button>
                         </form>
-                        <p class="mb-2 text-muted">Go to <a href="#">OPAC</a></p>
+                        <p class="mb-2 text-muted">Go to <a href="{{url('/opac')}}">OPAC</a></p>
                     </div>
                 </div>  
             </div>
