@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="container-fluid">
+  <a href="{{url('/')}}" class="btn btn-sm"><i class="fas fa-arrow-left fa-2x"></i></a>
     <div class="page-header">
         <h3 class="mt-2" id="page-title">OPAC</h3>
                 <hr>
