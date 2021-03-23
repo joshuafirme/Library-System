@@ -117,3 +117,12 @@ Route::post('/user-maintenance/store', 'Utilities\UserCtr@store');
 Route::post('/user-maintenance/update', 'Utilities\UserCtr@update');
 Route::get('/student-details/{user_id}', 'Utilities\UserCtr@getStudentDetails');
 Route::post('/user-maintenance/archive', 'Utilities\UserCtr@archive');
+
+/*
+|--------------------------------------------------------------------------
+| Visitor's Log
+|--------------------------------------------------------------------------
+*/
+Route::get('/visitors-log', 'VisitorsLogCtr@visitors_in_out_view');
+Route::post('/visitors-log/do-in/{user_id}', 'VisitorsLogCtr@visitorIn');
+Route::post('/visitors-log/do-out/{user_id}', 'VisitorsLogCtr@visitorOut');

@@ -7,7 +7,6 @@ $(document).ready(function()
     function fetchBooks(){
         $('#opac-table').DataTable({
 
-            bFilter: false, bInfo: false,
         
            processing: true,
            serverSide: true,

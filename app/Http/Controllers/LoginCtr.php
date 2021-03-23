@@ -21,7 +21,7 @@ class LoginCtr extends Controller
             return Redirect::to('/book-search');
         }
         else{
-            return Redirect::to('/')->with('invalid', 'Invalid User ID or password'); 
+            return Redirect::to('/')->with('danger', 'Invalid User ID or password'); 
         }
        
     }

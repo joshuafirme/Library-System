@@ -64,13 +64,7 @@ body {
                        
                         <form action="{{action('LoginCtr@login')}}" method="POST">
                             @csrf
-                            @if(\Session::has('invalid'))
-                            <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h5><i class="icon fa fa-check-circle"></i> </h5>
-                            {{ \Session::get('invalid') }}
-                            </div>      
-                            @endif
+                            @include('layouts.alert-validation')
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Username" name="user_id" required>
                             </div>
