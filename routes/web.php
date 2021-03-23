@@ -96,6 +96,9 @@ Route::get('/overdue-report/print/{date_from}/{date_to}', 'Reports\OverdueReport
 Route::get('/unreturned-report', 'Reports\UnreturnedReportCtr@index');
 Route::get('/unreturned-report/print/{date_from}/{date_to}', 'Reports\UnreturnedReportCtr@previewReport');
 
+Route::get('/loss-report', 'Reports\LossReportCtr@index');
+Route::get('/loss-report/print/{date_from}/{date_to}', 'Reports\LossReportCtr@previewReport');
+
 /*
 |--------------------------------------------------------------------------
 | Utilities
