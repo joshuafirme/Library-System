@@ -99,6 +99,9 @@ Route::get('/unreturned-report/print/{date_from}/{date_to}', 'Reports\Unreturned
 Route::get('/loss-report', 'Reports\LossReportCtr@index');
 Route::get('/loss-report/print/{date_from}/{date_to}', 'Reports\LossReportCtr@previewReport');
 
+Route::get('/weed-report', 'Reports\WeedReportCtr@index');
+Route::get('/weed-report/print/{date_from}/{date_to}', 'Reports\WeedReportCtr@previewReport');
+
 /*
 |--------------------------------------------------------------------------
 | Utilities

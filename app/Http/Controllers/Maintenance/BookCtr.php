@@ -127,7 +127,8 @@ class BookCtr extends Controller
         DB::table('tbl_books')
             ->where('id', $data['id_weed'])
             ->update([
-                'is_weed' => 1
+                'is_weed' => 1,
+                'updated_at' => date('Y-m-d h:m:s')
             ]);
 
         return redirect('/book-maintenance')->with('success', 'Book weed successfully');
