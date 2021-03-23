@@ -7,13 +7,24 @@ use DB, Auth;
 
 class VisitorsLogCtr extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::check()) {
         
             if(request()->ajax())
             {
-                return datatables()->of($this->getBooks())
+                return datatables()->of($this->getVisitorsLogAdmin($request->date_from, $request->date_to))
+                ->addColumn('in_out', function($b){
+                    if($b->in_out == 0){
+                        $z = '<span class="badge badge-warning">Out</span>';         
+                        return $z;
+                    }
+                    else{
+                        $z = '<span class="badge badge-success">In</span>';         
+                        return $z;
+                    }
+                })
+                ->rawColumns(['in_out'])
                 ->make(true);      
             }
     
@@ -90,6 +101,16 @@ class VisitorsLogCtr extends Controller
                 ->leftJoin('tbl_users AS U', 'U.user_id', '=', 'V.user_id')
                 ->leftJoin('tbl_grade AS G', 'G.user_id', '=', 'U.user_id')
                 ->whereDate('V.created_at', date('Y-m-d'))
+                ->get();
+    }
+
+    public function getVisitorsLogAdmin($date_from, $date_to)
+    {
+       return DB::table('tbl_visitors_log AS V')
+                ->select('V.*', 'U.user_id', 'U.name', 'G.grade', 'V.created_at')
+                ->leftJoin('tbl_users AS U', 'U.user_id', '=', 'V.user_id')
+                ->leftJoin('tbl_grade AS G', 'G.user_id', '=', 'U.user_id')
+                ->whereBetween('V.created_at', [$date_from, date('Y-m-d', strtotime($date_to . " + 1 day"))])
                 ->get();
     }
 }

@@ -6,6 +6,60 @@ $(document).ready(function()
           }
       });  
 
+    load_data();
+
+    function load_data()  {
+        let date_from = $('#date_from').val()
+        let date_to = $('#date_to').val();
+        fetchVisitorsLogAdmin(date_from, date_to);
+    }  
+
+    function fetchVisitorsLogAdmin(date_from, date_to){
+        $('#visitors-log-admin-table').DataTable({
+           processing: true,
+           serverSide: true,
+          
+           ajax:{
+            url: "/visitors-log-admin",
+            data:{
+                date_from:date_from,
+                date_to:date_to
+            },
+           }, 
+               
+           columns:[       
+            {data: 'user_id', name: 'user_id'},
+            {data: 'name', name: 'name'},
+            {data: 'grade', name: 'grade'},
+            {data: 'created_at', name: 'created_at'},
+            {data: 'in_out', name: 'in_out'},
+           ]
+
+          });
+    
+       }
+
+       $('#date_from').change(function()
+       {
+           let date_from = $('#date_from').val()
+           let date_to = $('#date_to').val();
+            console.log(date_from);
+            console.log(date_to);
+           $('#visitors-log-admin-table').DataTable().destroy();
+           fetchVisitorsLogAdmin(date_from, date_to);
+       });
+    
+      $('#date_to').change(function()
+      {
+        let date_from = $('#date_from').val()
+        let date_to = $('#date_to').val();
+         console.log(date_from);
+         console.log(date_to);
+         $('#visitors-log-admin-table').DataTable().destroy();
+         fetchVisitorsLogAdmin(date_from, date_to);
+      });
+
+
     fetchVisitorsLog();
 
     function fetchVisitorsLog(){
@@ -40,7 +94,11 @@ $(document).ready(function()
        $(document).on('click', '#btn_in', function()
        {     
             let user_id = $('#user_id').val();
-            visitorIn(user_id);
+            if(user_id){
+                visitorIn(user_id);
+            }else{
+                alert('please enter user id');
+            }
        });    
 
        function visitorIn(user_id)
@@ -63,7 +121,12 @@ $(document).ready(function()
        $(document).on('click', '#btn_out', function()
        {     
             let user_id = $('#user_id').val();
-            visitorOut(user_id);
+            if(user_id){
+                visitorOut(user_id); 
+            }else{
+                alert('please enter user id');
+            }
+
        });    
 
        function visitorOut(user_id)

@@ -25,6 +25,12 @@
             <span>Dashboard</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/visitors-log-admin') }}">
+            <i class="fas fa-fw fa-door-open"></i>
+            <span>Visitor's Log</span></a>
+    </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Transaction"
                 aria-expanded="true" aria-controls="Transaction">
