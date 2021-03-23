@@ -41,7 +41,8 @@ class UpdatePenalty extends Command
         DB::table('tbl_book_borrowed')
             ->whereRaw('due_date < CURDATE()')
             ->update([
-                'is_penalty' => 1
+                'is_penalty' => 1,
+                'status' => 2
             ]);  
             
         \Log::info("Penalty updated successfully!");

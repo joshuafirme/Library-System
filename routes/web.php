@@ -90,6 +90,9 @@ Route::get('/borrowed-report/print/{date_from}/{date_to}', 'Reports\BorrowedRepo
 Route::get('/returned-report', 'Reports\ReturnedReportCtr@index');
 Route::get('/returned-report/print/{date_from}/{date_to}', 'Reports\ReturnedReportCtr@previewReport');
 
+Route::get('/overdue-report', 'Reports\OverdueReportCtr@index');
+Route::get('/overdue-report/print/{date_from}/{date_to}', 'Reports\OverdueReportCtr@previewReport');
+
 /*
 |--------------------------------------------------------------------------
 | Utilities
