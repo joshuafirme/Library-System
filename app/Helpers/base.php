@@ -97,6 +97,7 @@ class base
                     <th style="border: 1px solid;">Contact Number</th>     
                     <th style="border: 1px solid;">Accession No</th>
                     <th style="border: 1px solid;">Title</th>
+                    <th style="border: 1px solid;">Date time borrowed</th>
                     <th style="border: 1px solid;">Due Date</th> 
             </thead>
             <tbody>
@@ -118,6 +119,7 @@ class base
                     <td style="border: 1px solid; padding:10px;">'. $data->contact_no .'</td>
                     <td style="border: 1px solid; padding:10px;">'. $data->accession_no.'</td>  
                     <td style="border: 1px solid; padding:10px;">'. $data->title .'</td>
+                    <td style="border: 1px solid; padding:10px;">'. $data->created_at .'</td>
                     <td style="border: 1px solid; padding:10px;">'. $data->due_date .'</td>             
                 </tr>
                 ';

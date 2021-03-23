@@ -4,26 +4,32 @@ namespace App\Http\Controllers\Transaction;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB, Input;
+use DB, Input, Auth;
 
 class ForReleaseCtr extends Controller
 {
     public function index()
     {
-        if(request()->ajax())
-        {
-            return datatables()->of($this->getForRelease())
-            ->addColumn('action', function($r){
-                $button =  '<a class="btn btn-sm btn-success mr-2" id="btn-release" user-id="'. $r->borrower_id .'" accession-no="'. $r->accession_no .'"
-                data-toggle="modal" data-target="#releaseModal"><i class="fa fa-check-circle"></i></a>';
-
-                return $button;
-            })
-            ->rawColumns(['action'])
-            ->make(true);      
+        if (Auth::check()) {
+            if(request()->ajax())
+            {
+                return datatables()->of($this->getForRelease())
+                ->addColumn('action', function($r){
+                    $button =  '<a class="btn btn-sm btn-success mr-2" id="btn-release" user-id="'. $r->borrower_id .'" accession-no="'. $r->accession_no .'"
+                    data-toggle="modal" data-target="#releaseModal"><i class="fa fa-check-circle"></i></a>';
+    
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);      
+            }
+    
+            return view('transaction.for-release');
+        }
+        else{
+            return redirect('/');
         }
 
-        return view('transaction.for-release');
     }
 
     public function getForRelease()

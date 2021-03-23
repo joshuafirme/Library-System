@@ -4,16 +4,22 @@ namespace App\Http\Controllers\Maintenance;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB, Input;
+use DB, Input, Auth;
 
 class PenaltyCtr extends Controller
 {
     public function index()
     {
-        return view('maintenance.penalty',[
-            'days' => $this->getDays(),
-            'penalty' => $this->getPenalty()
-        ]);
+        if (Auth::check()) {
+            return view('maintenance.penalty',[
+                'days' => $this->getDays(),
+                'penalty' => $this->getPenalty()
+            ]);
+        }
+        else{
+            return redirect('/');
+        }
+
     }
 
     public function activate()

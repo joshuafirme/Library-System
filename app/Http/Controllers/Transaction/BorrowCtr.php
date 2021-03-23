@@ -4,27 +4,33 @@ namespace App\Http\Controllers\Transaction;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB, Input;
+use DB, Input, Auth;
 use App\Helpers\base;
 
 class BorrowCtr extends Controller
 {
     public function index()
     {
-        if(request()->ajax())
-        {
-            return datatables()->of($this->getBooks())
-            ->addColumn('action', function($b){
-                $button =  '<a class="btn btn-sm btn-success" id="btn-borrow-book" book-id="'. $b->id .'" 
-                data-toggle="modal" data-target="#borrowModal"><i class="fa fa-bookmark"></i></a>';
-
-                return $button;
-            })
-            ->rawColumns(['action'])
-            ->make(true);      
+        if (Auth::check()) {
+            if(request()->ajax())
+            {
+                return datatables()->of($this->getBooks())
+                ->addColumn('action', function($b){
+                    $button =  '<a class="btn btn-sm btn-success" id="btn-borrow-book" book-id="'. $b->id .'" 
+                    data-toggle="modal" data-target="#borrowModal"><i class="fa fa-bookmark"></i></a>';
+    
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);      
+            }
+    
+            return view('transaction.borrow-book');
+        }
+        else{
+            return redirect('/');
         }
 
-        return view('transaction.borrow-book');
     }
 
     public function getBooks()

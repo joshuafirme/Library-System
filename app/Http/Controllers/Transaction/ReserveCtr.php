@@ -11,20 +11,26 @@ class ReserveCtr extends Controller
 {
     public function index()
     {
-        if(request()->ajax())
-        {
-            return datatables()->of($this->getBooks())
-            ->addColumn('action', function($b){
-                $button =  '<a class="btn btn-sm btn-success" id="btn-reserve-book" book-id="'. $b->id .'" 
-                data-toggle="modal" data-target="#reserveBookModal"><i class="fa fa-bookmark"></i></a>';
-
-                return $button;
-            })
-            ->rawColumns(['action'])
-            ->make(true);      
+        if (Auth::check()) {
+            if(request()->ajax())
+            {
+                return datatables()->of($this->getBooks())
+                ->addColumn('action', function($b){
+                    $button =  '<a class="btn btn-sm btn-success" id="btn-reserve-book" book-id="'. $b->id .'" 
+                    data-toggle="modal" data-target="#reserveBookModal"><i class="fa fa-bookmark"></i></a>';
+    
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);      
+            }
+    
+            return view('transaction.reserve-book');
+        }
+        else{
+            return redirect('/');
         }
 
-        return view('transaction.reserve-book');
     }
 
     public function getBooks()

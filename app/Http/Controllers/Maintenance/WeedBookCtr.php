@@ -10,19 +10,25 @@ class WeedBookCtr extends Controller
 {
     public function index()
     {
-        if(request()->ajax())
-        {
-            return datatables()->of($this->getWeedBooks())
-            ->addColumn('action', function($b){
-                $button = ' <a class="btn btn-sm btn-primary" id="btn-retrieve-book" book-id="'. $b->id .'" 
-                data-toggle="modal" data-target="#retrieveBookModal"><i class="fa fa-recycle"></i></a>';
-                return $button;
-            })
-            ->rawColumns(['action'])
-                ->make(true);      
+        if (Auth::check()) {
+            if(request()->ajax())
+            {
+                return datatables()->of($this->getWeedBooks())
+                ->addColumn('action', function($b){
+                    $button = ' <a class="btn btn-sm btn-primary" id="btn-retrieve-book" book-id="'. $b->id .'" 
+                    data-toggle="modal" data-target="#retrieveBookModal"><i class="fa fa-recycle"></i></a>';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                    ->make(true);      
+            }
+    
+            return view('maintenance.weed-book');
+        }
+        else{
+            return redirect('/');
         }
 
-        return view('maintenance.weed-book');
     }
 
     public function getWeedBooks()

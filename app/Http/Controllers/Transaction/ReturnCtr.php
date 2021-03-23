@@ -4,42 +4,48 @@ namespace App\Http\Controllers\Transaction;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB, Input;
+use DB, Input, Auth;
 
 class ReturnCtr extends Controller
 {
     public function index()
     {
-        if(request()->ajax())
-        {
-            return datatables()->of($this->getReturnedBooks())
-            ->addColumn('action', function($b){
-                $button =  '<a class="btn btn-sm btn-success" id="btn-return-book" user-id="'. $b->user_id .'" accession-no="'. $b->accession_no .'"  
-                data-toggle="modal" data-target="#returnModal"><i class="fa fa-hand-holding"></i></a>';
-
-                return $button;
-            })
-            ->addColumn('status', function($b){
-                if($b->status == 0){
-                    $p = '<span class="badge badge-warning">Unreturned</span>';
-                }
-                return $p;
-            })
-            ->addColumn('is_penalty', function($b){
-                if($b->is_penalty == 1){
-                    $z = '<span class="badge badge-danger">Yes</span>';         
-                    return $z;
-                }
-                else{
-                    $z = '<span class="badge badge-success">No</span>';         
-                    return $z;
-                }
-            })
-            ->rawColumns(['action', 'status', 'is_penalty'])
-            ->make(true);      
+        if (Auth::check()) {
+            if(request()->ajax())
+            {
+                return datatables()->of($this->getReturnedBooks())
+                ->addColumn('action', function($b){
+                    $button =  '<a class="btn btn-sm btn-success" id="btn-return-book" user-id="'. $b->user_id .'" accession-no="'. $b->accession_no .'"  
+                    data-toggle="modal" data-target="#returnModal"><i class="fa fa-hand-holding"></i></a>';
+    
+                    return $button;
+                })
+                ->addColumn('status', function($b){
+                    if($b->status == 0){
+                        $p = '<span class="badge badge-warning">Unreturned</span>';
+                    }
+                    return $p;
+                })
+                ->addColumn('is_penalty', function($b){
+                    if($b->is_penalty == 1){
+                        $z = '<span class="badge badge-danger">Yes</span>';         
+                        return $z;
+                    }
+                    else{
+                        $z = '<span class="badge badge-success">No</span>';         
+                        return $z;
+                    }
+                })
+                ->rawColumns(['action', 'status', 'is_penalty'])
+                ->make(true);      
+            }
+    
+            return view('transaction.return-book');
+        }
+        else{
+            return redirect('/');
         }
 
-        return view('transaction.return-book');
     }
 
     public function getReturnedBooks()

@@ -5,20 +5,26 @@ namespace App\Http\Controllers\Reports;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\base;
-use DB, Input;
+use DB, Input, Auth;
 
 class ReturnedReportCtr extends Controller
 {
     public function index(Request $request)
     {
-        $data = $this->getReturnedBooks($request->date_from, $request->date_to);
-        if(request()->ajax())
-        {
-            return datatables()->of($data)
-            ->make(true);      
+        if (Auth::check()) {
+            $data = $this->getReturnedBooks($request->date_from, $request->date_to);
+            if(request()->ajax())
+            {
+                return datatables()->of($data)
+                ->make(true);      
+            }
+    
+            return view('reports.returned-report');
+        }
+        else{
+            return redirect('/');
         }
 
-        return view('reports.returned-report');
     }
 
     public function getReturnedBooks($date_from, $date_to)

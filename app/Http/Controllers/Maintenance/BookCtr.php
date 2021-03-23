@@ -4,31 +4,37 @@ namespace App\Http\Controllers\Maintenance;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Input, DB, Excel, Session;
+use Input, DB, Session, Auth;
 
 class BookCtr extends Controller
 {
     public function index()
     {
-        if(request()->ajax())
-        {
-            return datatables()->of($this->getBooks())
-            ->addColumn('action', function($b){
-                $button = ' <a class="btn btn-sm btn-primary" id="btn-edit-book" book-id="'. $b->id .'" 
-                data-toggle="modal" data-target="#editBookModal"><i class="fa fa-edit"></i></a>';
-
-                $button .= ' <a class="btn btn-sm btn-danger" id="btn-weed-book" book-id="'. $b->id .'" 
-                data-toggle="modal" data-target="#weedModal"><i class="fa fa-archive"></i></a>';
-
-                return $button;
-            })
-            ->rawColumns(['action'])
-            ->make(true);      
+        if (Auth::check()) {
+            if(request()->ajax())
+            {
+                return datatables()->of($this->getBooks())
+                ->addColumn('action', function($b){
+                    $button = ' <a class="btn btn-sm btn-primary" id="btn-edit-book" book-id="'. $b->id .'" 
+                    data-toggle="modal" data-target="#editBookModal"><i class="fa fa-edit"></i></a>';
+    
+                    $button .= ' <a class="btn btn-sm btn-danger" id="btn-weed-book" book-id="'. $b->id .'" 
+                    data-toggle="modal" data-target="#weedModal"><i class="fa fa-archive"></i></a>';
+    
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);      
+            }
+    
+            return view('maintenance.book',[
+                'category' => $this->getCategories()
+            ]);
+        }
+        else{
+            return redirect('/');
         }
 
-        return view('maintenance.book',[
-            'category' => $this->getCategories()
-        ]);
     }
 
     public function getBooks()

@@ -5,20 +5,26 @@ namespace App\Http\Controllers\Reports;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\base;
-use DB, Input;
+use DB, Input, Auth;
 
 class BorrowedReportCtr extends Controller
 {
     public function index(Request $request)
     {
-        $data = $this->getBorrowedBooks($request->date_from, $request->date_to);
-        if(request()->ajax())
-        {
-            return datatables()->of($data)
-            ->make(true);      
+        if (Auth::check()) {
+            $data = $this->getBorrowedBooks($request->date_from, $request->date_to);
+            if(request()->ajax())
+            {
+                return datatables()->of($data)
+                ->make(true);      
+            }
+    
+            return view('reports.borrowed-report');
+        }
+        else{
+            return redirect('/');
         }
 
-        return view('reports.borrowed-report');
     }
 
     public function getBorrowedBooks($date_from, $date_to)

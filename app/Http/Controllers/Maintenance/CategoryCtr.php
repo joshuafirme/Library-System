@@ -4,14 +4,20 @@ namespace App\Http\Controllers\Maintenance;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Input, DB;
+use Input, DB, Auth;
 class CategoryCtr extends Controller
 {
     public function index()
     {
-        return view('maintenance.category',[
-            'category' => $this->getCategories(),
-        ]);
+        if (Auth::check()) {
+            return view('maintenance.category',[
+                'category' => $this->getCategories(),
+            ]);
+        }
+        else{
+            return redirect('/');
+        }
+
     }
 
     public function store()
