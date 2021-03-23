@@ -57,7 +57,7 @@
                     <a class="collapse-item" href="{{ url('/unreturned-report') }}">Unreturned</a>
                     <a class="collapse-item" href="{{ url('/loss-report') }}">Loss book</a>
                     <a class="collapse-item" href="{{ url('/weed-report') }}">Weed book list</a>
-                    <a class="collapse-item" href="{{ url('/list-report') }}">List of penalty</a>
+                    <a class="collapse-item" href="{{ url('/penalty-report') }}">List of penalty</a>
                     <a class="collapse-item" href="{{ url('/visitor-log-report') }}">Visitor's log</a>
                 </div>
             </div>

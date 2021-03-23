@@ -102,6 +102,9 @@ Route::get('/loss-report/print/{date_from}/{date_to}', 'Reports\LossReportCtr@pr
 Route::get('/weed-report', 'Reports\WeedReportCtr@index');
 Route::get('/weed-report/print/{date_from}/{date_to}', 'Reports\WeedReportCtr@previewReport');
 
+Route::get('/penalty-report', 'Reports\PenaltyReportCtr@index');
+Route::get('/penalty-report/print/{date_from}/{date_to}', 'Reports\PenaltyReportCtr@previewReport');
+
 /*
 |--------------------------------------------------------------------------
 | Utilities

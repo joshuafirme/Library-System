@@ -107,6 +107,7 @@
     <script src="{{asset('js/reports/overdue.js')}}"></script>
     <script src="{{asset('js/reports/loss.js')}}"></script>
     <script src="{{asset('js/reports/weed.js')}}"></script>
+    <script src="{{asset('js/reports/penalty.js')}}"></script>
     
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 </body>
