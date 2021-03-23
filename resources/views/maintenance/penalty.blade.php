@@ -43,7 +43,7 @@
                                   </div> 
                                   
                                   <div class="form-group">
-                                  <label>Penalty per day</label>
+                                  <label>Amount of penalty</label>
                                   <input type="number" step="any" class="form-control" name="penalty" value={{ $penalty }}>
                                   </div>  
                                   <button type="submit" class="btn btn-sm btn-success" id="btn-activate">Activate</button>

@@ -40,9 +40,9 @@ class UnreturnedReportCtr extends Controller
 
     public function previewReport()
     {
-        $unreturned = $this->getUnreturnedBooks($date_from, $date_to);
+        $unreturned = $this->getUnreturnedBooks();
 
-        $output = base::convertDataToHTML($unreturned, 'Totay', '', 'Unreturned');
+        $output = base::convertDataToHTML($unreturned, date('Y-m-d'), date('Y-m-d'), 'Unreturned');
     
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($output);
@@ -50,4 +50,6 @@ class UnreturnedReportCtr extends Controller
     
         return $pdf->stream();
     }
+
+    
 }

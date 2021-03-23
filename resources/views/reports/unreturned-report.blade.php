@@ -24,7 +24,7 @@
       
               <div class="row">
                 <div class="col-sm-2 col-md-2 col-lg-10 mb-3">
-                    <button class="btn btn-danger btn-sm"id="btn-returned-print"><span class='fa fa-print'></span> Print</button>
+                    <button class="btn btn-danger btn-sm"id="btn-unreturned-print"><span class='fa fa-print'></span> Print</button>
                     </div>
                 <div class="col-md-12 col-lg-12">
         

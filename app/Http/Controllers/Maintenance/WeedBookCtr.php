@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Maintenance;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB, Input;
+use DB, Input, Auth;
 
 class WeedBookCtr extends Controller
 {
