@@ -103,6 +103,7 @@
 
     <script src="{{asset('js/reports/borrowed.js')}}"></script>
     <script src="{{asset('js/reports/returned.js')}}"></script>
+    <script src="{{asset('js/reports/unreturned.js')}}"></script>
     <script src="{{asset('js/reports/overdue.js')}}"></script>
     
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
