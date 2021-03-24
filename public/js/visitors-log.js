@@ -96,6 +96,7 @@ $(document).ready(function()
             let user_id = $('#user_id').val();
             if(user_id){
                 visitorIn(user_id);
+                $('#user_id').val('');
             }else{
                 alert('please enter user id');
             }
@@ -110,6 +111,7 @@ $(document).ready(function()
                success:function(response){
                     if(response=='0'){
                         alert('Invalid User ID!');
+                        $('#user_id').val('');
                     }
                     console.log(response);
                     $('#visitors-log-table').DataTable().ajax.reload();
@@ -123,6 +125,7 @@ $(document).ready(function()
             let user_id = $('#user_id').val();
             if(user_id){
                 visitorOut(user_id); 
+                $('#user_id').val('');
             }else{
                 alert('please enter user id');
             }
@@ -138,6 +141,7 @@ $(document).ready(function()
                success:function(response){
                     if(response=='0'){
                         alert('Invalid User ID!');
+                        $('#user_id').val('');
                     }
                     console.log(response);
                     $('#visitors-log-table').DataTable().ajax.reload();

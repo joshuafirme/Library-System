@@ -26,9 +26,17 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/visitors-log-admin') }}">
-            <i class="fas fa-fw fa-door-open"></i>
-            <span>Visitor's Log</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#visitor"
+            aria-expanded="true" aria-controls="visitor">
+            <i class="fas fa-door-open"></i>
+            <span>Visitor's Log</span>
+        </a>
+        <div id="visitor" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ url('/visitors-log-admin') }}">Admin Interface</a>
+                <a class="collapse-item" href="{{ url('/visitors-log') }}">Student Interface</a>
+            </div>
+        </div>
     </li>
 
         <li class="nav-item">
@@ -64,7 +72,7 @@
                     <a class="collapse-item" href="{{ url('/loss-report') }}">Loss book</a>
                     <a class="collapse-item" href="{{ url('/weed-report') }}">Weed book list</a>
                     <a class="collapse-item" href="{{ url('/penalty-report') }}">List of penalty</a>
-                    <a class="collapse-item" href="{{ url('/visitor-log-report') }}">Visitor's log</a>
+                    <a class="collapse-item" href="{{ url('/visitors-log-report') }}">Visitor's log</a>
                 </div>
             </div>
         </li>

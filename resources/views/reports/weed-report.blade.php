@@ -38,7 +38,7 @@
                                   <th>Author</th>   
                                   <th>Publisher</th> 
                                   <th>Category</th>          
-                                  <th>Sub Category</th>
+                                  <th>Classification</th>
                                   <th>Edition</th>
                                   <th>Copies</th>
                                   <th>Date weed</th>

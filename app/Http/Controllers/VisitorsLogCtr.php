@@ -89,7 +89,8 @@ class VisitorsLogCtr extends Controller
     public function isUserIDValid($user_id)
     {
         $row=DB::table('tbl_users')
-                    ->where('user_id', $user_id)->get();
+                    ->where('user_id', $user_id)
+                    ->where('user_type', 2)->get();
             
         return $row->count() > 0 ? true : false;
     }
@@ -101,6 +102,7 @@ class VisitorsLogCtr extends Controller
                 ->leftJoin('tbl_users AS U', 'U.user_id', '=', 'V.user_id')
                 ->leftJoin('tbl_grade AS G', 'G.user_id', '=', 'U.user_id')
                 ->whereDate('V.created_at', date('Y-m-d'))
+                ->orderBy('V.id', 'desc')
                 ->get();
     }
 
@@ -111,6 +113,7 @@ class VisitorsLogCtr extends Controller
                 ->leftJoin('tbl_users AS U', 'U.user_id', '=', 'V.user_id')
                 ->leftJoin('tbl_grade AS G', 'G.user_id', '=', 'U.user_id')
                 ->whereBetween('V.created_at', [$date_from, date('Y-m-d', strtotime($date_to . " + 1 day"))])
+                ->orderBy('V.id', 'desc')
                 ->get();
     }
 }
