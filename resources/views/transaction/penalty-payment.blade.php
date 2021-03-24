@@ -65,13 +65,16 @@
                             
                           </div>
                           <div class="tab-pane fade mt-5" id="paidtab" role="tabpanel" aria-labelledby="paid-tab">
-                            <table class="table table-data responsive  table-hover" id="usser-table" style="width: 100%">                               
+                            <table class="table table-data responsive  table-hover" id="penalty-paid-table" style="width: 100%">                               
                                 <thead>
                                   <tr>
-                                      <th>User name</th>
-                                      <th>Name</th> 
-                                      <th>Contact Number</th> 
-                                      <th>Action</th>
+                                    <th>User ID</th>
+                                    <th>Borrower</th>
+                                    <th>Contact Number</th>
+                                    <th>Accession Number</th>
+                                    <th>Title</th>
+                                    <th>Due date</th>
+                                    <th>Remarks</th>
                                   </tr>
                               </thead>
                               </table> 
@@ -103,9 +106,10 @@
           <p>Are you sure do you want record this as paid?</p>
           <p>Penalty amount: <b>₱ {{ \app\Helpers\base::getPenaltyAmount() }}</b></p>
         </div>
-        <form action="{{ action('Utilities\UserCtr@archive') }}" method="POST">
+        <form action="{{ action('Transaction\PenaltyPaymentCtr@pay') }}" method="POST">
           @csrf
-        <input type="hidden" id="id_archive" name="id_archive">
+        <input type="hidden" id="user_id" name="user_id">
+        <input type="hidden" id="acn_no" name="accession_no">
         <div class="modal-footer">
           <button class="btn btn-sm btn-outline-dark" type="submit">Yes</button>
           <button class="btn btn-sm btn-danger cancel-delete" data-dismiss="modal">Cancel</button>

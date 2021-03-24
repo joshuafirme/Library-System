@@ -40,6 +40,23 @@ class PenaltyPaymentCtr extends Controller
 
     }
 
+    public function displayPaid()
+    {
+        if(request()->ajax())
+        {
+            return datatables()->of($this->getPenaltyPaid())
+            ->addColumn('remarks', function($b){
+                if($b->status == 4){
+                    $p = '<span class="badge badge-success">Paid</span>';
+                }
+                return $p;
+            })
+            ->rawColumns(['remarks'])
+            ->make(true);      
+        }
+
+    }
+
     public function getPenaltyList()
     {
        return DB::table('tbl_book_borrowed AS BR')
@@ -48,5 +65,30 @@ class PenaltyPaymentCtr extends Controller
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->whereIn('status', [2, 3])
                 ->get();
+    }
+
+    public function getPenaltyPaid()
+    {
+       return DB::table('tbl_book_borrowed AS BR')
+                ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title')
+                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
+                ->where('status', 4)
+                ->get();
+    }
+
+    public function pay()
+    {
+        $data = Input::all();
+
+        DB::table('tbl_book_borrowed as BR')
+                ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
+                ->where('U.user_id', $data['user_id'])
+                ->where('BR.accession_no', $data['accession_no'])
+                ->update([
+                    'status' => 4
+                ]);
+
+        return redirect('/penalty-payment')->with('success', 'The penalty amount was successfully paid.');        
     }
 }
