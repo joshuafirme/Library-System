@@ -98,7 +98,7 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                @foreach ($librarian as $data)                                
+                                @foreach ($admin as $data)                                
                                 <tr>
                                   <td>{{ $data->user_id }}</td>
                                   <td>{{ $data->name }}</td>

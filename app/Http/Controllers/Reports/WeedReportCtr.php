@@ -51,6 +51,14 @@ class WeedReportCtr extends Controller
     public static function convertDataToHTML($report_data, $date_from, $date_to, $report_title)
     {
         $output = '
+        <style>
+        .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        }
+        </style>
+        <img class="center" src="img/logo.png" style="width:100px;">
         <div style="width:100%">
         <p style="text-align:right;">Date: '. date("M/d/Y", strtotime($date_from)) .' - '. date("M/d/Y", strtotime($date_to)).'</p>
         <h1 style="text-align:center;">'.$report_title.' Report</h1>
