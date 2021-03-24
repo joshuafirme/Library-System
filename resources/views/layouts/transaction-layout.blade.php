@@ -110,6 +110,7 @@
     <script src="{{asset('js/transaction/for-release.js')}}"></script>
     <script src="{{asset('js/transaction/borrow.js')}}"></script>
     <script src="{{asset('js/transaction/return.js')}}"></script>
+    <script src="{{asset('js/transaction/penalty-payment.js')}}"></script>
 
 </body>
 

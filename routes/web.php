@@ -79,6 +79,10 @@ Route::get('/return-book', 'Transaction\ReturnCtr@index');
 Route::get('/get-borrowed-details/{user_id}/{accession_no}', 'Transaction\ReturnCtr@getBorrowedDetails');
 Route::post('/return-book/do-return', 'Transaction\ReturnCtr@return');
 
+Route::get('/penalty-payment', 'Transaction\PenaltyPaymentCtr@index');
+Route::post('/penalty-payment/do-pay', 'Transaction\PenaltyPaymentCtr@pay');
+Route::get('/penalty-payment/paid', 'Transaction\PenaltyPaymentCtr@displayPaid');
+
 /*
 |--------------------------------------------------------------------------
 | Reports

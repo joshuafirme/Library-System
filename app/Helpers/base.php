@@ -20,6 +20,11 @@ class base
        return DB::table('tbl_penalty')->value('days');
     }
 
+    public static function getPenaltyAmount()
+    {
+       return DB::table('tbl_penalty')->value('penalty');
+    }
+
     public static function getBorrowerName($id)
     {
        return DB::table('tbl_users')->where('id', $id)->value('name');
