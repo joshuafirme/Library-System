@@ -19,7 +19,7 @@
                 <select class="form-control" name="user_type" id="user_type">
                     <option value="2">Student</option>
                     <option value="1">Teacher</option>
-                    <option value="0">Librarian</option>
+                    <option value="3">Librarian</option>
                     <option value="0">Administrator</option>
                 </select>
               </div>
@@ -115,7 +115,7 @@
                 <select class="form-control" name="user_type" id="edit_user_type">
                     <option value="2">Student</option>
                     <option value="1">Teacher</option>
-                    <option value="0">Librarian</option>
+                    <option value="3">Librarian</option>
                     <option value="0">Administrator</option>
                 </select>
               </div>

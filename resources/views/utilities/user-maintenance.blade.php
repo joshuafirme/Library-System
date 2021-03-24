@@ -60,6 +60,11 @@
                               </a>
                           </li>
                           <li class="nav-item">
+                            <a class="nav-link" id="librarian-tab" data-toggle="tab" href="#librariantab" role="tab" aria-controls="home" aria-selected="false">Librarian
+         
+                            </a>
+                        </li>
+                          <li class="nav-item">
                               <a class="nav-link" id="expired-tab" data-toggle="tab" href="#expiredtab" role="tab" aria-controls="profile" aria-selected="false">Admin</a>
                           </li>
                          
@@ -83,7 +88,7 @@
                             
                           </div>
                           <div class="tab-pane fade mt-5" id="expiredtab" role="tabpanel" aria-labelledby="expired-tab">
-                            <table class="table table-data responsive  table-hover" id="user-table" style="width: 100%">                               
+                            <table class="table table-data responsive  table-hover" id="usser-table" style="width: 100%">                               
                                 <thead>
                                   <tr>
                                       <th>User name</th>
@@ -92,10 +97,48 @@
                                       <th>Action</th>
                                   </tr>
                               </thead>
-                              
+                              <tbody>
+                                @foreach ($librarian as $data)                                
+                                <tr>
+                                  <td>{{ $data->user_id }}</td>
+                                  <td>{{ $data->name }}</td>
+                                  <td>{{ $data->contact_no }}</td>
+                                  <td>{{ $data->address }}</td>
+                                  <td></td>
+                                </tr>
+                                @endforeach
+                              </tbody>
                               </table> 
                           </div>
                  
+                          <div class="tab-pane fade mt-5" id="librariantab" role="tabpanel" aria-labelledby="librarian-tab">
+                         
+                            <table class="table table-data responsive  table-hover" id="librarian-table" style="width: 100%">                               
+                                <thead>
+                                  <tr>
+                                    <th>User ID</th>
+                                    <th>Name</th> 
+                                    <th>Contact Number</th> 
+                                    <th>Address</th> 
+                                    <th>Action</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                @foreach ($librarian as $data)                                
+                                <tr>
+                                  <td>{{ $data->user_id }}</td>
+                                  <td>{{ $data->name }}</td>
+                                  <td>{{ $data->contact_no }}</td>
+                                  <td>{{ $data->address }}</td>
+                                  <td></td>
+                                </tr>
+                                @endforeach
+                              </tbody>
+                              
+                              </table>
+                        
+                          </div>
+
                           <div class="tab-pane fade mt-5" id="expirytab" role="tabpanel" aria-labelledby="expiry-tab">
                          
                             <table class="table table-data responsive  table-hover" id="teacher-table" style="width: 100%">                               

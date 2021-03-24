@@ -24,7 +24,7 @@ $(document).ready(function()
 
        $('#user_type').change(function(){
             let user_type = $(this).val();
-            if(user_type == 0) {
+            if(user_type == 0 || user_type == 3) {
                 $('#grade').attr('readonly', true);
                 $('#department').attr('readonly', true);         
             }
@@ -40,7 +40,7 @@ $(document).ready(function()
 
        $('#edit_user_type').change(function(){
             let user_type = $(this).val();
-            if(user_type == 0) {
+            if(user_type == 0 || user_type == 3) {
                 $('#edit_grade').attr('readonly', true);
                 $('#edit_department').attr('readonly', true);         
             }
