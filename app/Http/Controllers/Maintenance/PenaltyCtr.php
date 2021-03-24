@@ -44,6 +44,8 @@ class PenaltyCtr extends Controller
                 ]);
         }
 
+        \app\Helpers\base::recordAction(Auth::id(), 'Penalty Maintenance', 'activate');
+
         return redirect('/penalty-maintenance')->with('success', 'Penalty activated successfully');
     }
 

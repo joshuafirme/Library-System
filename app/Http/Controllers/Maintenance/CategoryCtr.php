@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Maintenance;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Input, DB, Auth;
+use App\Helpers\base;
 class CategoryCtr extends Controller
 {
     public function index()
@@ -30,6 +31,8 @@ class CategoryCtr extends Controller
                 'classification' => $data['classification']
             ]);
 
+            base::recordAction(Auth::id(), 'Category Maintenance', 'add');
+
         return redirect('/category-maintenance')->with('success', 'Data Saved');
     }
 
@@ -43,6 +46,8 @@ class CategoryCtr extends Controller
                 'category' => $data['category'],
                 'classification' => $data['classification']
             ]);
+
+            base::recordAction(Auth::id(), 'Category Maintenance', 'update');
 
         return redirect('/category-maintenance')->with('success', 'Data updated successfully');
     }

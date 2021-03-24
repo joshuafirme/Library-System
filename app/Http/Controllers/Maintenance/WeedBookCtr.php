@@ -49,6 +49,8 @@ class WeedBookCtr extends Controller
                 'is_weed' => 0
             ]);
 
+        \app\Helpers\base::recordAction(Auth::id(), 'Weed Maintenance', 'retrieve');
+        
         return redirect('/weed-maintenance')->with('success', 'Book was retrieve successfully');
     }
 }

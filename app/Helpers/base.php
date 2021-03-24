@@ -85,6 +85,17 @@ class base
             return false;
         }
     }
+
+    public static function recordAction($user_id, $module, $action)
+    {
+        DB::table('tbl_audit_trail')
+            ->insert([
+                'user_id' => $user_id,
+                'module' => $module,
+                'action' => $action,
+                'created_at' => date('Y-m-d h:m:s')
+            ]);
+    }
     
     public static function convertDataToHTML($report_data, $date_from, $date_to, $report_title)
     {

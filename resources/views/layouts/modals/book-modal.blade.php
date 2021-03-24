@@ -213,7 +213,7 @@
           
           <form action="{{ action('Maintenance\BookCtr@import') }}" method="POST" enctype="multipart/form-data">
             @csrf
-              <input type="file" name="excel_file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+              <input type="file" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
             </div>
 
             <div class="modal-footer">

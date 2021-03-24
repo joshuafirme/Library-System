@@ -10,10 +10,14 @@ class UserCtr extends Controller
 {
     public function index()
     {
-        return view('utilities.user-maintenance',[
-            'librarian' => $this->getLibrarian(),
-            'admin' => $this->getAdmin()
-        ]);
+        if (Auth::check())
+        {
+            return view('utilities.user-maintenance',[
+                'librarian' => $this->getLibrarian(),
+                'admin' => $this->getAdmin()
+            ]);
+        }
+
     }
 
     public function getAdmin()

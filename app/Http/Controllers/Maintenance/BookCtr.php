@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Maintenance;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Helpers\base;
 use Input, DB, Session, Auth;
 
 class BookCtr extends Controller
@@ -54,23 +55,25 @@ class BookCtr extends Controller
 
         $category_id = $this->getCategoryID($data['category'],$data['classification']);
 
-        $id = DB::table('tbl_books')
-                ->insertGetId([
-                    '_prefix' => 'ACN'.date('Y'),
-                    'accession_no' => $this->getAccessionNo(),
-                    'title' => $data['title'],
-                    'author' => $data['author'],
-                    'copies' => $data['copies'],
-                    'publisher' => $data['publisher'],
-                    'category_id' => $category_id,
-                    'edition' => $data['edition'],
-                    'no_of_pages' => $data['no_of_pages'],
-                    'amount_if_lost' => $data['amount_if_lost'],
-                    'cost' => $data['cost'],
-                    'date_acq' => $data['date_acq'],
-                    'date_published' => $data['date_published'],
-                    'is_weed' => 0
-                ]);
+        DB::table('tbl_books')
+        ->insert([
+            '_prefix' => 'ACN'.date('Y'),
+            'accession_no' => $this->getAccessionNo(),
+            'title' => $data['title'],
+            'author' => $data['author'],
+            'copies' => $data['copies'],
+            'publisher' => $data['publisher'],
+            'category_id' => $category_id,
+            'edition' => $data['edition'],
+            'no_of_pages' => $data['no_of_pages'],
+            'amount_if_lost' => $data['amount_if_lost'],
+            'cost' => $data['cost'],
+            'date_acq' => $data['date_acq'],
+            'date_published' => $data['date_published'],
+            'is_weed' => 0
+        ]); 
+        
+        base::recordAction(Auth::id(), 'Book Maintenance', 'add');
 
         return redirect('/book-maintenance')->with('success', 'Data Saved');
     }
@@ -102,6 +105,7 @@ class BookCtr extends Controller
         DB::table('tbl_books')
             ->where('id', $data['id_hidden'])
             ->update([
+                '_prefix' => 'ACN'.date('Y'),
                 'title' => $data['title'],
                 'author' => $data['author'],
                 'publisher' => $data['publisher'],
@@ -116,6 +120,7 @@ class BookCtr extends Controller
                 'is_weed' => 0
             ]);
 
+        base::recordAction(Auth::id(), 'Book Maintenance', 'update');
 
         return redirect('/book-maintenance')->with('success', 'Data updated successfully');
     }
@@ -130,6 +135,8 @@ class BookCtr extends Controller
                 'is_weed' => 1,
                 'updated_at' => date('Y-m-d h:m:s')
             ]);
+
+            base::recordAction(Auth::id(), 'Book Maintenance', 'weed');
 
         return redirect('/book-maintenance')->with('success', 'Book weed successfully');
     }
@@ -159,82 +166,83 @@ class BookCtr extends Controller
 
     function import(Request $request)
     {
-        if ($request->input('submit') != null ){
-
-            $file = $request->file('file');
+        $file = $request->file('file');
       
-            // File Details 
-            $filename = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $tempPath = $file->getRealPath();
-            $fileSize = $file->getSize();
-            $mimeType = $file->getMimeType();
-      
-            // Valid File Extensions
-            $valid_extension = array("csv");
-      
-            // 2MB in Bytes
-            $maxFileSize = 2097152; 
-      
-            // Check file extension
-            if(in_array(strtolower($extension),$valid_extension)){
-      
-              // Check file size
-              if($fileSize <= $maxFileSize){
-      
-                // File upload location
-                $location = 'uploads';
-      
-                // Upload file
-                $file->move($location,$filename);
-      
-                // Import CSV to Database
-                $filepath = public_path($location."/".$filename);
-      
-                // Reading file
-                $file = fopen($filepath,"r");
-      
-                $importData_arr = array();
-                $i = 0;
-      
-                while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
-                   $num = count($filedata );
-                   
-                   // Skip first row (Remove below comment if you want to skip the first row)
-                   if($i == 0){
-                      $i++;
-                      continue; 
-                   }
-                   for ($c=0; $c < $num; $c++) {
-                      $importData_arr[$i][] = $filedata [$c];
-                   }
-                   $i++;
-                }
-                fclose($file);
-      
-                // Insert to MySQL database
-                foreach($importData_arr as $importData){
-      
-                  $insertData = array(
-                     "username"=>$importData[1],
-                     "name"=>$importData[2],
-                     "gender"=>$importData[3],
-                     "email"=>$importData[4]);
-                  Page::insertData($insertData);
-      
-                }
-      
-                Session::flash('message','Import Successful.');
-              }else{
-                Session::flash('message','File too large. File must be less than 2MB.');
-              }
-      
-            }else{
-               Session::flash('message','Invalid File Extension.');
+        // File Details 
+        $filename = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        $tempPath = $file->getRealPath();
+        $fileSize = $file->getSize();
+        $mimeType = $file->getMimeType();
+  
+        // Valid File Extensions
+        $valid_extension = array("csv");
+  
+        // 2MB in Bytes
+        $maxFileSize = 2097152; 
+  
+        // Check file extension
+        if(in_array(strtolower($extension),$valid_extension)){
+  
+          // Check file size
+          if($fileSize <= $maxFileSize){
+  
+            // File upload location
+            $location = 'uploads';
+  
+            // Upload file
+            $file->move($location,$filename);
+  
+            // Import CSV to Database
+            $filepath = public_path($location."/".$filename);
+  
+            // Reading file
+            $file = fopen($filepath,"r");
+  
+            $importData_arr = array();
+            $i = 0;
+  
+            while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
+               $num = count($filedata );
+               
+               // Skip first row (Remove below comment if you want to skip the first row)
+               if($i == 0){
+                  $i++;
+                  continue; 
+               }
+               for ($c=0; $c < $num; $c++) {
+                  $importData_arr[$i][] = $filedata [$c];
+               }
+               $i++;
             }
-      
+            fclose($file);
+  
+            // Insert to MySQL database
+            foreach($importData_arr as $importData){
+                 DB::table('tbl_books')
+                 ->insert([
+                     '_prefix' => 'ACN'.date('Y'),
+                     'title' => $importData[3],
+                   //  'publisher' => $importData[3],
+                     'edition' => $importData[1],
+                     'no_of_pages' => $importData[2],
+                     'is_weed' => 0
+                 ]);
+  
+            }
+  
+            Session::flash('message','Import Successful.');
+          }else{
+            Session::flash('message','File too large. File must be less than 2MB.');
           }
-      
-          return redirect('/book-maintenance')->with('success', 'Data imported');
+  
+        }else{
+           Session::flash('message','Invalid File Extension.');
         }
+  
+        base::recordAction(Auth::id(), 'Maintenance', 'import');
+  
+      return redirect('/book-maintenance')->with('success', 'Data imported successfully!');
+            
+    }
 }

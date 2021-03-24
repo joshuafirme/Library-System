@@ -106,6 +106,7 @@
     <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
     <script src="{{asset('js/utilities/user.js')}}"></script>
+    <script src="{{asset('js/utilities/audit-trail.js')}}"></script>
 
 </body>
 

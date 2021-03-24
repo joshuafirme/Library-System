@@ -126,6 +126,8 @@ Route::post('/user-maintenance/update', 'Utilities\UserCtr@update');
 Route::get('/student-details/{user_id}', 'Utilities\UserCtr@getStudentDetails');
 Route::post('/user-maintenance/archive', 'Utilities\UserCtr@archive');
 
+Route::get('/audit-trail', 'Utilities\AuditTrailCtr@index');
+
 /*
 |--------------------------------------------------------------------------
 | Visitor's Log
