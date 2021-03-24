@@ -53,16 +53,38 @@ $(document).ready(function()
 
        $(document).on('click', '#btn-pay', function()
        {   
-           let user_id, accession_no; 
+           let user_id, accession_no, status; 
    
            user_id = $(this).attr('user-id');
            accession_no = $(this).attr('accession-no');
+           status = $(this).attr('status');
            
            $('#user_id').val(user_id);
            $('#acn_no').val(accession_no);
-           console.log(user_id);
-           console.log(accession_no);
+
+           if(status==3){
+                getBookAmoutIfLoss(accession_no);
+                $('#penalty_amount').css('display', 'none');
+                $('#amount_if_lost_cont').css('display', 'inline');
+           }else{
+                $('#penalty_amount').css('display', 'inline');
+                $('#amount_if_lost_cont').css('display', 'none');
+           }
        });
       
+
+       function getBookAmoutIfLoss(accession_no)
+       {
+           $.ajax({
+               url:"/getBookAmoutIfLoss/"+accession_no,
+               type:"GET",
+         
+               success:function(response){
+                    if(response){
+                        $('#amount_if_lost').text(response);
+                    }
+               }
+              });
+       }
 
 });

@@ -15,7 +15,7 @@ class PenaltyPaymentCtr extends Controller
             {
                 return datatables()->of($this->getPenaltyList())
                 ->addColumn('action', function($b){
-                    $button =  '<a class="btn btn-sm btn-success" id="btn-pay" user-id="'. $b->user_id .'" accession-no="'. $b->accession_no .'"  
+                    $button =  '<a class="btn btn-sm btn-success" id="btn-pay" user-id="'. $b->user_id .'" accession-no="'. $b->accession_no .'" status="'. $b->status .'"
                     data-toggle="modal" data-target="#payModal"><i class="fa fa-dollar-sign"></i></a>';
     
                     return $button;
@@ -90,5 +90,10 @@ class PenaltyPaymentCtr extends Controller
                 ]);
 
         return redirect('/penalty-payment')->with('success', 'The penalty amount was successfully paid.');        
+    }
+
+    public static function getBookAmoutIfLoss($accession_no)
+    {
+       return DB::table('tbl_books as B')->where(DB::raw('CONCAT(B._prefix, B.accession_no)'), $accession_no)->value('amount_if_lost');
     }
 }

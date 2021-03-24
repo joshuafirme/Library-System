@@ -104,7 +104,8 @@
         </div>
         <div class="modal-body">
           <p>Are you sure do you want record this as paid?</p>
-          <p>Penalty amount: <b>₱ {{ \app\Helpers\base::getPenaltyAmount() }}</b></p>
+          <p id="penalty_amount">Penalty amount: <b>₱ {{ \app\Helpers\base::getPenaltyAmount() }}</b></p>
+          <p id="amount_if_lost_cont">Amount if lost: ₱ <b id="amount_if_lost"></b></p>
         </div>
         <form action="{{ action('Transaction\PenaltyPaymentCtr@pay') }}" method="POST">
           @csrf
