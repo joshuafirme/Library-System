@@ -1,4 +1,4 @@
-{{--<img width="1500" height="70"  src="{{asset('img/banner.jpg')}}" alt="" style="margin-left: -40px">--}}
+<img width="100%" height="70"  src="{{asset('img/banner.jpg')}}" alt="" style="margin-left: -40px">
 <ul class="navbar-nav ml-auto">
 
      <!-- Nav Item - User Information -->

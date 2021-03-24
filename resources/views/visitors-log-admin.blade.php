@@ -30,18 +30,6 @@
 
                     <div class="row mb-2">
            
-                    
-                      <div class="col-sm-2 mb-3">
-                        <input data-column="9" type="date" class="form-control" id="date_from" value="{{ date('Y-m-d') }}">
-                        </div>
-      
-                        <div class="mt-2">
-                          -
-                          </div>
-            
-                        <div class="col-sm-2 mb-3">
-                          <input data-column="9" type="date" class="form-control" id="date_to" value="{{ date('Y-m-d') }}">
-                          </div>
     
                        </div>
                           <table class="table table-data responsive  table-hover" id="visitors-log-admin-table">                               

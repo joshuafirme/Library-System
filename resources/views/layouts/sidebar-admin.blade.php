@@ -13,7 +13,7 @@
     </a>
     <div id="visitor" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ url('/visitors-log-admin') }}">Admin Interface</a>
+            <a class="collapse-item" href="{{ url('/visitors-log-admin') }}">Viewing Interface</a>
             <a class="collapse-item" href="{{ url('/visitors-log') }}">Student Interface</a>
         </div>
     </div>
