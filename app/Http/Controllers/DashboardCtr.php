@@ -80,8 +80,7 @@ class DashboardCtr extends Controller
                 ->select('BR.*', 'B.*', 'C.category', 'C.classification', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no'))
                 ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
-                ->where('BR.is_approve', 0)
-                ->where('BR.id', Auth::id())
+                ->where('BR.user_id', Auth::id())
                 ->get();
     }
 }
