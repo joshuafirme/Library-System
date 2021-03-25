@@ -85,7 +85,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ url('/user-maintenance') }}">User Maintenance</a>
                 <a class="collapse-item" href="{{ url('/audit-trail') }}">Audit Trail</a>
-                <a class="collapse-item" href="utilities-border.html">Archive</a>
+                <a class="collapse-item" href="{{ url('/archive') }}">Archive</a>
             </div>
         </div>
     </li>

@@ -128,6 +128,9 @@ Route::post('/user-maintenance/archive', 'Utilities\UserCtr@archive');
 
 Route::get('/audit-trail', 'Utilities\AuditTrailCtr@index');
 
+Route::get('/archive', 'Utilities\ArchiveCtr@index');
+Route::post('/archive/retrieve-user', 'Utilities\ArchiveCtr@retrieve');
+
 /*
 |--------------------------------------------------------------------------
 | Visitor's Log

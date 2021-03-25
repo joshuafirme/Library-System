@@ -107,6 +107,7 @@
 
     <script src="{{asset('js/utilities/user.js')}}"></script>
     <script src="{{asset('js/utilities/audit-trail.js')}}"></script>
+    <script src="{{asset('js/utilities/archive.js')}}"></script>
 
 </body>
 

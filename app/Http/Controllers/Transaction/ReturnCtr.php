@@ -79,6 +79,7 @@ class ReturnCtr extends Controller
             ->where('BR.accession_no', $data['accession_no'])
             ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
             ->update([
+                'copies' => DB::raw('copies + 1'),
                 'status' => $data['remarks'],
                 'updated_at' => date('Y-m-d h:m:s')
             ]);

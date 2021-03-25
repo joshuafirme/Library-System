@@ -252,7 +252,8 @@ class UserCtr extends Controller
         DB::table('tbl_users')
             ->where('id', $data['id_archive'])
             ->update([
-                'archive_status' => 1
+                'archive_status' => 1,
+                'updated_at' => date('Y-m-d h:m:s')
             ]);
 
         return redirect('/user-maintenance')->with('success', 'Student was archived successfully');
