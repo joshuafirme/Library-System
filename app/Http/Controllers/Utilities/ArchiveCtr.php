@@ -34,7 +34,7 @@ class ArchiveCtr extends Controller
         return DB::table('tbl_users as U')
         ->select('U.*', 'G.grade')
         ->leftJoin('tbl_grade AS G', 'G.user_id', '=', 'U.user_id', 'U.updated_at')
-        ->where('user_type', 2)
+        ->whereIn('user_type', [1,2])
         ->where('archive_status', 1)
         ->get();
     }
