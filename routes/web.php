@@ -131,6 +131,11 @@ Route::get('/audit-trail', 'Utilities\AuditTrailCtr@index');
 Route::get('/archive', 'Utilities\ArchiveCtr@index');
 Route::post('/archive/retrieve-user', 'Utilities\ArchiveCtr@retrieve');
 
+Route::get('/backup-and-restore', 'Utilities\BackupAndRestoreCtr@index');
+Route::post('/backup-and-restore/backup', 'Utilities\BackupAndRestoreCtr@backup');
+Route::post('/backup-and-restore/restore', 'Utilities\BackupAndRestoreCtr@restore');
+
+
 /*
 |--------------------------------------------------------------------------
 | Visitor's Log

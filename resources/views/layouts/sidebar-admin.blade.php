@@ -86,6 +86,7 @@
                 <a class="collapse-item" href="{{ url('/user-maintenance') }}">User Maintenance</a>
                 <a class="collapse-item" href="{{ url('/audit-trail') }}">Audit Trail</a>
                 <a class="collapse-item" href="{{ url('/archive') }}">Archive</a>
+                <a class="collapse-item" href="{{ url('/backup-and-restore') }}">Backup and restore</a>
             </div>
         </div>
     </li>
