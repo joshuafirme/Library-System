@@ -62,7 +62,7 @@ class base
     {
         $row = DB::table('tbl_book_borrowed')
                 ->where('user_id', Auth::id())
-                ->where('is_returned', 0)
+                ->where('status', 0)
                 ->get();
                 
         if($row->count() == 3){

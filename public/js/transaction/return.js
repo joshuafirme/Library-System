@@ -61,10 +61,17 @@ $(document).ready(function()
                  $('#due_date').text(data[0].due_date);
                  
                  if(data[0].is_penalty == 1){
+                  $("#remarks option[value=1]").remove();
                     $('#remarks').val(2);
                  }
                  else{
-                    $('#remarks').val(1);
+                  $('#remarks').append('<option value="' + 1 + '">Returned</option>');
+                  $('#remarks').val(1);
+                   /* $('#remarks  option').each(function(){
+                     if ($('#remarks').val() == 1) {
+                        $('#remarks').append('<option value="' + 1 + '">Returned</option>');
+                     }
+                   });*/
                  }
                }
               });

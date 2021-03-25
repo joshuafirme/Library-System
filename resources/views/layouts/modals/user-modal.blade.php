@@ -171,7 +171,7 @@
   
               <div class="col-4 mb-2">
                 <label class="col-form-label">New Password</label>
-                <input type="password" class="form-control" name="password" id="password" required>
+                <input type="password" class="form-control" name="password" id="password">
               </div>
 
           </div>

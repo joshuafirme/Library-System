@@ -102,7 +102,7 @@ class VisitorsLogCtr extends Controller
                 ->leftJoin('tbl_users AS U', 'U.user_id', '=', 'V.user_id')
                 ->leftJoin('tbl_grade AS G', 'G.user_id', '=', 'U.user_id')
                 ->whereDate('V.created_at', date('Y-m-d'))
-                ->orderBy('V.id', 'desc')
+                ->orderBy('V.created_at', 'desc')
                 ->get();
     }
 

@@ -22,9 +22,8 @@ class ReturnCtr extends Controller
                 })
                 ->addColumn('status', function($b){
                     if($b->status == 0){
-                        $p = '<span class="badge badge-warning">Unreturned</span>';
+                       return $p = '<span class="badge badge-warning">Unreturned</span>';
                     }
-                    return $p;
                 })
                 ->addColumn('is_penalty', function($b){
                     if($b->is_penalty == 1){
@@ -54,7 +53,7 @@ class ReturnCtr extends Controller
                 ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title')
                 ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
-                ->where('status', 0)
+                ->whereIn('status', [0,2,3])
                 ->get();
     }
 
