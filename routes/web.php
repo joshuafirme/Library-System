@@ -132,7 +132,7 @@ Route::get('/display-student', 'Utilities\UserCtr@displayStudent');
 Route::get('/display-teacher', 'Utilities\UserCtr@displayTeacher');
 Route::post('/user-maintenance/store', 'Utilities\UserCtr@store');
 Route::post('/user-maintenance/update', 'Utilities\UserCtr@update');
-Route::get('/student-details/{user_id}', 'Utilities\UserCtr@getStudentDetails');
+Route::get('/user-details/{user_id}', 'Utilities\UserCtr@getUserDetails');
 Route::post('/user-maintenance/archive', 'Utilities\UserCtr@archive');
 
 Route::get('/audit-trail', 'Utilities\AuditTrailCtr@index');

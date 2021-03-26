@@ -107,18 +107,37 @@ $(document).ready(function()
             let user_id = $(this).attr('user-id');
             let user_type = $(this).attr('user-type');
 
-            if(user_type == 2)
+            if(user_type == 1)
             {
-                $('#edit_grade').attr('readonly', false);
+                $('#edit_user_type').val(1);
+                $('#edit_department').attr('readonly', false);
+                $('#edit_grade').attr('readonly', true);
+                getUserDetails(user_id);
+            }
+            else if(user_type == 2){
+                $('#edit_user_type').val(2);
                 $('#edit_department').attr('readonly', true);
-                getStudentDetails(user_id);
+                $('#edit_grade').attr('readonly', false);
+                getUserDetails(user_id);
+            }
+            else if(user_type == 0){
+                $('#edit_user_type').val(0);
+                $('#edit_department').attr('readonly', true);
+                $('#edit_grade').attr('readonly', true);
+                getUserDetails(user_id);
+            }
+            else if(user_type == 3){
+                $('#edit_user_type').val(3);
+                $('#edit_department').attr('readonly', true);
+                $('#edit_grade').attr('readonly', true);
+                getUserDetails(user_id);
             }
         });
     
-        function getStudentDetails(user_id)
+        function getUserDetails(user_id)
         {
             $.ajax({
-                url:"/student-details/"+user_id,
+                url:"/user-details/"+user_id,
                 type:"GET",
           
                 success:function(data){

@@ -70,7 +70,7 @@ class UserCtr extends Controller
         {
             return datatables()->of($this->getTeacher())
             ->addColumn('action', function($b){
-                $button = ' <a class="btn btn-sm btn-primary" id="btn-edit-user" user-id="'. $b->id .'" 
+                $button = ' <a class="btn btn-sm btn-primary" id="btn-edit-user" user-id="'. $b->id .'" user-type="'. $b->user_type .'" 
                 data-toggle="modal" data-target="#editUserModal"><i class="fa fa-edit"></i></a>';
 
                 $button .= ' <a class="btn btn-sm btn-danger" id="btn-archive-user" user-id="'. $b->id .'" 
@@ -178,7 +178,7 @@ class UserCtr extends Controller
     }
 
 
-    public function getStudentDetails($user_id)
+    public function getUserDetails($user_id)
     {
        return DB::table('tbl_users as U')
                 ->select('U.*', 'G.grade')

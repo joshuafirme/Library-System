@@ -103,8 +103,10 @@
                                   <td>{{ $data->user_id }}</td>
                                   <td>{{ $data->name }}</td>
                                   <td>{{ $data->contact_no }}</td>
-                                  <td>{{ $data->address }}</td>
-                                  <td></td>
+                                  <td>
+                                    <a class="btn btn-sm btn-primary" id="btn-edit-user" user-id="{{ $data->id }}" user-type="{{ $data->user_type }}" 
+                                      data-toggle="modal" data-target="#editUserModal"><i class="fa fa-edit"></i></a>
+                                  </td>
                                 </tr>
                                 @endforeach
                               </tbody>
@@ -130,7 +132,10 @@
                                   <td>{{ $data->name }}</td>
                                   <td>{{ $data->contact_no }}</td>
                                   <td>{{ $data->address }}</td>
-                                  <td></td>
+                                  <td>
+                                    <a class="btn btn-sm btn-primary" id="btn-edit-user" user-id="{{ $data->id }}" user-type="{{ $data->user_type }}" 
+                                      data-toggle="modal" data-target="#editUserModal"><i class="fa fa-edit"></i></a>
+                                  </td>
                                 </tr>
                                 @endforeach
                               </tbody>
