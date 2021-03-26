@@ -36,7 +36,7 @@ class ForReleaseCtr extends Controller
     {
        return DB::table('tbl_book_reserve AS BR')
                 ->select('BR.*', 'U.user_id', 'BR.user_id as borrower_id', 'U.name', 'B.title')
-                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->where('BR.is_approve', 1)
                 ->get();
@@ -63,7 +63,7 @@ class ForReleaseCtr extends Controller
             ]);
 
             DB::table('tbl_books as B')
-            ->where(DB::raw('CONCAT(B._prefix, B.accession_no)'), $data['accession_no'])
+            ->where('B.accession_no', $data['accession_no'])
             ->update([
                 'copies' => DB::raw('copies - 1')
             ]);     

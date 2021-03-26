@@ -61,7 +61,7 @@ class PenaltyPaymentCtr extends Controller
     {
        return DB::table('tbl_book_borrowed AS BR')
                 ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title')
-                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->whereIn('status', [2, 3])
                 ->get();
@@ -71,7 +71,7 @@ class PenaltyPaymentCtr extends Controller
     {
        return DB::table('tbl_book_borrowed AS BR')
                 ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title')
-                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->where('status', 4)
                 ->get();
@@ -94,6 +94,6 @@ class PenaltyPaymentCtr extends Controller
 
     public static function getBookAmoutIfLoss($accession_no)
     {
-       return DB::table('tbl_books as B')->where(DB::raw('CONCAT(B._prefix, B.accession_no)'), $accession_no)->value('amount_if_lost');
+       return DB::table('tbl_books as B')->where('B.accession_no', $accession_no)->value('amount_if_lost');
     }
 }

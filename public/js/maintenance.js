@@ -69,7 +69,7 @@ $(document).ready(function()
                type:"GET",
          
                success:function(data){
-                $('input[name=accession_no]').val(data);
+              //  $('input[name=accession_no]').val(data);
                }
               });
        }

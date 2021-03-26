@@ -36,7 +36,7 @@ class ReserveCtr extends Controller
     public function getBooks()
     {
        return DB::table('tbl_books AS B')
-                ->select('B.*', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no,category,classification'))
+                ->select('B.*', 'category','classification')
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
                 ->where('is_weed', 0)
                 ->get();
@@ -104,7 +104,7 @@ class ReserveCtr extends Controller
     {
        return DB::table('tbl_book_reserve AS BR')
                 ->select('BR.*', 'U.user_id', 'BR.user_id as borrower_id', 'U.name', 'B.title')
-                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->where('BR.is_approve', 0)
                 ->get();

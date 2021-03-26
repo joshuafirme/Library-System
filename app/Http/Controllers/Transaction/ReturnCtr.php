@@ -51,7 +51,7 @@ class ReturnCtr extends Controller
     {
        return DB::table('tbl_book_borrowed AS BR')
                 ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title')
-                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->whereIn('status', [0,2,3])
                 ->get();
@@ -61,7 +61,7 @@ class ReturnCtr extends Controller
     {
        return DB::table('tbl_book_borrowed AS BR')
                 ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title', 'grade', 'department')
-                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->leftJoin('tbl_grade AS G', 'G.user_id', '=', 'U.user_id')
                 ->leftJoin('tbl_dept AS D', 'D.user_id', '=', 'U.user_id')

@@ -41,7 +41,7 @@ class BookCtr extends Controller
     public function getBooks()
     {
        return DB::table('tbl_books AS B')
-                ->select('B.*', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no,category,classification'))
+                ->select('B.*', 'category', 'classification')
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
                 ->where('is_weed', 0)
                 ->get();
@@ -58,7 +58,7 @@ class BookCtr extends Controller
         DB::table('tbl_books')
         ->insert([
             '_prefix' => 'ACN'.date('Y'),
-            'accession_no' => $this->getAccessionNo(),
+            'accession_no' => $data['accession_no'],
             'title' => $data['title'],
             'author' => $data['author'],
             'copies' => $data['copies'],
@@ -90,7 +90,7 @@ class BookCtr extends Controller
     public function getBookDetails($id)
     {
         return DB::table('tbl_books AS B')
-                ->select('B.*', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no, category, classification'))
+                ->select('B.*', 'category', 'classification')
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
                 ->where('B.id', $id)
                 ->get();
@@ -106,6 +106,7 @@ class BookCtr extends Controller
             ->where('id', $data['id_hidden'])
             ->update([
                 '_prefix' => 'ACN'.date('Y'),
+                'accession_no' => $data['accession_no'],
                 'title' => $data['title'],
                 'author' => $data['author'],
                 'publisher' => $data['publisher'],
