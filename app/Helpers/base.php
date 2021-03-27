@@ -72,11 +72,12 @@ class base
         }
     }
 
-    public static function isAlreadyBorrowed($id)
+    public static function isAlreadyBorrowed($id, $accession_no)
     {
         $row = DB::table('tbl_book_borrowed')
                 ->where('user_id', $id)
-                ->where('is_returned', 0)
+                ->where('accession_no', $accession_no)
+                ->where('status', 0)
                 ->get();
                 
         if($row->count() > 0){

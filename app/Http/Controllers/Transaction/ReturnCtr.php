@@ -78,9 +78,14 @@ class ReturnCtr extends Controller
             ->where('BR.accession_no', $data['accession_no'])
             ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
             ->update([
-                'copies' => DB::raw('copies + 1'),
                 'status' => $data['remarks'],
-                'updated_at' => date('Y-m-d h:m:s')
+                'BR.updated_at' => date('Y-m-d h:m:s')
+            ]);
+
+            DB::table('tbl_books')
+            ->where('accession_no', $data['accession_no'])
+            ->update([
+                'copies' => DB::raw('copies + 1'),
             ]);
 
         return redirect('/return-book')->with('success', 'The book was successfully returned');

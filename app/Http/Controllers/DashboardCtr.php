@@ -65,8 +65,8 @@ class DashboardCtr extends Controller
     public function getBorrowed()
     {
        return DB::table('tbl_book_borrowed AS BR')
-       ->select('BR.*', 'B.*', 'C.category', 'C.classification', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no'))
-                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+       ->select('BR.*', 'B.*', 'C.category', 'C.classification')
+                ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
                 ->whereNotIn('BR.status', [4])
@@ -77,8 +77,8 @@ class DashboardCtr extends Controller
     public function getReserved()
     {
        return DB::table('tbl_book_reserve AS BR')
-                ->select('BR.*', 'B.*', 'C.category', 'C.classification', DB::raw('CONCAT(B._prefix, B.accession_no) as accession_no'))
-                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->select('BR.*', 'B.*', 'C.category', 'C.classification')
+                ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
                 ->where('BR.user_id', Auth::id())
                 ->get();

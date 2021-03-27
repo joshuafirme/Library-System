@@ -66,7 +66,7 @@ class BorrowCtr extends Controller
         {
             if(!($this->isLimitReached($data['user_id'])))
             {
-                if(base::isAlreadyBorrowed($data['user_id']))
+                if(base::isAlreadyBorrowed($data['user_id'], $data['accession_no']))
                 {
                     return redirect('/borrow-book')->with('danger', 'The book was already borrowed by '.$b_name);
                 }else{
@@ -74,8 +74,8 @@ class BorrowCtr extends Controller
                     ->insert([
                         'user_id' => $data['user_id'],
                         'accession_no' => $data['accession_no'],
-                        'is_returned' => 0,
                         'status' => 0,
+                        'is_penalty' => 0,
                         'created_at' => date('Y-m-d h:m:s'),
                         'due_date' => date('Y-m-d', strtotime(date('Y-m-d'). ' + '.$days.' days')),
                     ]);
@@ -100,7 +100,7 @@ class BorrowCtr extends Controller
     {
         $row = DB::table('tbl_book_borrowed')
                 ->where('user_id', $user_id)
-                ->where('is_returned', 0)
+                ->where('status', 0)
                 ->get();
                 
         if($row->count() >= 3){
