@@ -237,7 +237,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>Are you sure do you want to archive this book?</p>
+          <p>Are you sure do you want to weed this book?</p>
         </div>
         <form action="{{ action('Maintenance\BookCtr@weed') }}" method="POST">
           @csrf
