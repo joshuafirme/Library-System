@@ -31,7 +31,7 @@ class UnreturnedReportCtr extends Controller
     {
        return DB::table('tbl_book_borrowed AS BR')
                 ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title', 'BR.created_at')
-                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->where('BR.status', 0)
                 ->get();

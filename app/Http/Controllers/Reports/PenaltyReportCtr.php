@@ -42,10 +42,10 @@ class PenaltyReportCtr extends Controller
     {
        return DB::table('tbl_book_borrowed AS BR')
                 ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title', 'BR.created_at')
-                ->leftJoin('tbl_books AS B', DB::raw('CONCAT(B._prefix, B.accession_no)'), '=', 'BR.accession_no')
+                ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
                 ->whereIn('BR.status', [2, 3])
-                ->whereBetween('BR.updated_at', [$date_from, $date_to]) // date that the borrower report to librarian, return, loss, overdue
+                ->whereBetween('BR.updated_at', [$date_from, date('Y-m-d', strtotime($date_to. ' + 1 days'))]) // date that the borrower report to librarian, return, loss, overdue
                 ->get();
     }
 

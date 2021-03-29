@@ -33,7 +33,7 @@ class base
     public static function hasOneLeftBook($accession_no)
     {
         $row = DB::table('tbl_books as B')
-                ->where(DB::raw('CONCAT(B._prefix, B.accession_no)'), $accession_no)
+                ->where('B.accession_no', $accession_no)
                 ->where('copies', 1)
                 ->get();
 

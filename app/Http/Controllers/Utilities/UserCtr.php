@@ -216,6 +216,10 @@ class UserCtr extends Controller
                 'grade' => $data['grade'],
             ]); 
         }
+        else if($data['user_type'] == 3)
+        {
+            $this->updateUser($data['user_id'], $data['name'], $data['password'], $data['contact_no'], $data['address'], $data['user_type']);
+        }
        
 
         return redirect('/user-maintenance')->with('success', 'Data Saved');

@@ -53,7 +53,7 @@ class ReturnCtr extends Controller
                 ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title')
                 ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
-                ->whereIn('status', [0,2,3])
+                ->whereIn('status', [0,2])
                 ->get();
     }
 
