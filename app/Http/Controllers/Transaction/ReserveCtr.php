@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Transaction;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB, Input, Auth;
+use DB, Input, Auth, Helper;
 use App\Helpers\base;
 
 class ReserveCtr extends Controller
@@ -46,25 +46,32 @@ class ReserveCtr extends Controller
     {
         $data = Input::all();
 
-        if(base::isBookAlreadyReserved(Auth::id(), $data['accession_no']))
+        if(base::hasOneLeftBook($data['accession_no']))
         {
-            return redirect('/reserve-book')->with('danger', 'You have already reserved this book with accession number '.$data['accession_no']);
+            return redirect('/reserve-book')->with('danger', 'Borrow denied! The book have only 1 copy remaining.');
         }
-        else
-        {
-            if(base::isLimitReached())
+        else{
+            if(base::isBookAlreadyReserved(Auth::id(), $data['accession_no']))
             {
-                return redirect('/reserve-book')->with('danger', 'Reservation denied!. Because you have already reached the borrowing limit!');
+                return redirect('/reserve-book')->with('danger', 'You have already reserved this book with accession number '.$data['accession_no']);
             }
-            else{
-                DB::table('tbl_book_reserve')
-                ->insert([
-                    'user_id' => Auth::id(),
-                    'accession_no' => $data['accession_no'],
-                    'reservation_date' => $data['reservation_date'],
-                    'is_approve' => 0,
-                ]);
+            else
+            {
+                if(base::isLimitReached())
+                {
+                    return redirect('/reserve-book')->with('danger', 'Reservation denied!. Because you have already reached the borrowing limit!');
+                }
+                else{
+                    DB::table('tbl_book_reserve')
+                    ->insert([
+                        'user_id' => Auth::id(),
+                        'accession_no' => $data['accession_no'],
+                        'reservation_date' => $data['reservation_date'],
+                        'is_approve' => 0,
+                    ]);
+                }
             }
+            
         }
         
         
@@ -115,14 +122,21 @@ class ReserveCtr extends Controller
     {
         $data = Input::all();
 
-        $row = DB::table('tbl_book_reserve')
-                ->where('user_id', $data['user_id'])
-                ->where('accession_no', $data['accession_no'])
-                ->update([
-                    'is_approve' => 1
-                ]);
+        if(base::hasOneLeftBook($data['accession_no']))
+        {
+            return redirect('/reserve-book')->with('danger', 'Borrow denied! The book have only 1 copy remaining.');
+        }
+        else{
+            $row = DB::table('tbl_book_reserve')
+            ->where('user_id', $data['user_id'])
+            ->where('accession_no', $data['accession_no'])
+            ->update([
+                'is_approve' => 1
+            ]);
 
-        return redirect('/approve-reservation')->with('success', 'Reservation was approved');
+            return redirect('/approve-reservation')->with('success', 'Reservation was approved');
+        }
+       
     }
 
     public function declineReservation($user_id, $accession_no)
