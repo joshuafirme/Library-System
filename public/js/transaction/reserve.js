@@ -70,6 +70,12 @@ $(document).ready(function()
                alert('You cannot reserve that date!');
                $('#reservation_date').val(getCurrentDate());
            }
+           else if(getCurrentDatePlusOneWeek() < res_date ){
+            alert('You cannot reserve more than 7 days!');
+            console.log(getCurrentDatePlusOneWeek());
+            $('#reservation_date').val(getCurrentDate());
+        }
+           
        });
 
        function getCurrentDate(){
@@ -81,6 +87,34 @@ $(document).ready(function()
         return d.getFullYear() + '-' +
             (month<10 ? '0' : '') + month + '-' +
             (day<10 ? '0' : '') + day;
+       }
+
+       function getCurrentDatePlusOneWeek(){
+        var d = new Date();
+
+        var month = d.getMonth()+1;
+        var day = d.getDate();
+
+        let next_month_days=0;
+        let week_days = 7;
+        var days;
+
+        while (day < 31) {   
+            day ++;
+            week_days--;
+            if(day==31)
+            {
+                days = next_month_days + week_days;
+                month++;
+            }
+            else{
+                days = day;
+            }
+          }
+ 
+        return d.getFullYear() + '-' +
+            (month<10 ? '0' : '') + month + '-' +
+            (days<10 ? '0' : '') + days;
        }
 
 
