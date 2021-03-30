@@ -33,7 +33,7 @@ class LossReportCtr extends Controller
                 ->select('BR.*', 'U.user_id', 'U.name', 'U.contact_no', 'B.title', 'BR.created_at')
                 ->leftJoin('tbl_books AS B', 'B.accession_no', '=', 'BR.accession_no')
                 ->leftJoin('tbl_users AS U', 'U.id', '=', 'BR.user_id')
-                ->where('BR.status', 3)
+                ->whereIn('BR.status', [3,4])
                 ->whereBetween('BR.updated_at', [$date_from, date('Y-m-d', strtotime($date_to. ' + 1 days'))])
                 ->get();
     }
