@@ -177,6 +177,22 @@ class UserCtr extends Controller
         }
     }
 
+    function importStudent(Request $request)
+    {
+        $file = $request->file('file');
+        base::importCSV($file);
+
+        return redirect('/user-maintenance')->with('success', 'Student information imported successfully!');          
+    }
+
+    function importTeacher(Request $request)
+    {
+        $file = $request->file('file');
+        base::importCSV($file);
+
+        return redirect('/user-maintenance')->with('success', 'Student information imported successfully!');          
+    }
+
 
     public function getUserDetails($user_id)
     {

@@ -46,6 +46,7 @@ class BookCtr extends Controller
        return DB::table('tbl_books AS B')
                 ->select('B.*', 'category', 'classification')
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
+                ->orderBy('id', 'asc')
                 ->where('is_weed', 0)
                 ->get();
     }
@@ -56,7 +57,7 @@ class BookCtr extends Controller
     {
         $data = Input::all();
 
-        $category_id = $this->getCategoryID($data['category'],$data['classification']);
+        $category_id = base::getCategoryID($data['category'],$data['classification']);
 
         DB::table('tbl_books')
         ->insert([
@@ -82,13 +83,6 @@ class BookCtr extends Controller
     }
 
 
-    public function getCategoryID($category, $classification)
-    {
-      return DB::table('tbl_category')
-                ->where('category', $category)
-                ->where('classification', $classification)
-                ->value('id');
-    }
 
     public function getBookDetails($id)
     {
@@ -103,7 +97,7 @@ class BookCtr extends Controller
     {
         $data = Input::all();
 
-        $category_id = $this->getCategoryID($data['category'],$data['classification']);
+        $category_id = base::getCategoryID($data['category'],$data['classification']);
 
         DB::table('tbl_books')
             ->where('id', $data['id_hidden'])
@@ -171,92 +165,10 @@ class BookCtr extends Controller
     function import(Request $request)
     {
         $file = $request->file('file');
-      
-        // File Details 
-        $filename = $file->getClientOriginalName();
-        $extension = $file->getClientOriginalExtension();
-        $tempPath = $file->getRealPath();
-        $fileSize = $file->getSize();
-        $mimeType = $file->getMimeType();
-  
-        // Valid File Extensions
-        $valid_extension = array("csv");
-  
-        // 2MB in Bytes
-        $maxFileSize = 2097152; 
-  
-        // Check file extension
-        if(in_array(strtolower($extension),$valid_extension)){
-  
-          // Check file size
-          if($fileSize <= $maxFileSize){
-  
-            // File upload location
-            $location = 'uploads';
-  
-            // Upload file
-            $file->move($location,$filename);
-  
-            // Import CSV to Database
-            $filepath = public_path($location."/".$filename);
-  
-            // Reading file
-            $file = fopen($filepath,"r");
-  
-            $importData_arr = array();
-            $i = 0;
-  
-            while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
-               $num = count($filedata );
-               
-               // Skip first row (Remove below comment if you want to skip the first row)
-               if($i == 0){
-                  $i++;
-                  continue; 
-               }
-               for ($c=0; $c < $num; $c++) {
-                  $importData_arr[$i][] = $filedata [$c];
-               }
-               $i++;
-            }
-            fclose($file);
-  
-            // Insert to MySQL database
-            foreach($importData_arr as $importData)
-            {
-                $category_id = $this->getCategoryID($importData[5], $importData[12]);
 
-                DB::table('tbl_books')
-                ->insert([
-                    'accession_no' => $importData[0],
-                    'title' => $importData[1],
-                    'author' => $importData[2],
-                    'publisher' => $importData[3],
-                    'copies' => $importData[4],
-                    'category_id' => $category_id,
-                    'edition' => $importData[6],
-                    'no_of_pages' => $importData[7],
-                    'amount_if_lost' => $importData[8],
-                    'cost' => $importData[9],
-                    'date_acq' => date("Y-m-d", strtotime($importData[10])),
-                    'date_published' => date("Y-m-d", strtotime($importData[11])),
-                    'is_weed' => 0
-                ]);
-  
-            }
-  
-            Session::flash('message','Import Successful.');
-          }else{
-            Session::flash('message','File too large. File must be less than 2MB.');
-          }
-  
-        }else{
-           Session::flash('message','Invalid File Extension.');
-        }
-  
+        base::CSVImporter($file, 'book');
         base::recordAction(Auth::id(), 'Maintenance', 'import');
-  
-      return redirect('/book-maintenance')->with('success', 'Data imported successfully!');
-            
+
+        return redirect('/book-maintenance')->with('success', 'Data imported successfully!');          
     }
 }
