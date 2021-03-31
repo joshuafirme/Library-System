@@ -235,8 +235,8 @@ class BookCtr extends Controller
                     'no_of_pages' => $importData[7],
                     'amount_if_lost' => $importData[8],
                     'cost' => $importData[9],
-                    'date_acq' => $importData[10],
-                    'date_published' => $importData[11],
+                    'date_acq' => date("Y-m-d", strtotime($importData[10])),
+                    'date_published' => date("Y-m-d", strtotime($importData[11])),
                     'is_weed' => 0
                 ]);
   
