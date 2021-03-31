@@ -16,10 +16,13 @@ class BookCtr extends Controller
             {
                 return datatables()->of($this->getBooks())
                 ->addColumn('action', function($b){
-                    $button = ' <a class="btn btn-sm btn-primary" id="btn-edit-book" book-id="'. $b->id .'" 
+                    $button = ' <a class="btn btn-sm btn-primary m-1" id="btn-view-book" book-id="'. $b->id .'" 
+                    data-toggle="modal" data-target="#viewModal"><i class="fa fa-eye"></i></a>';
+
+                    $button .= ' <a class="btn btn-sm btn-success m-1" id="btn-edit-book" book-id="'. $b->id .'" 
                     data-toggle="modal" data-target="#editBookModal"><i class="fa fa-edit"></i></a>';
     
-                    $button .= ' <a class="btn btn-sm btn-danger" id="btn-weed-book" book-id="'. $b->id .'" 
+                    $button .= ' <a class="btn btn-sm btn-danger m-1" id="btn-weed-book" book-id="'. $b->id .'" 
                     data-toggle="modal" data-target="#weedModal"><i class="fa fa-archive"></i></a>';
     
                     return $button;
@@ -220,15 +223,22 @@ class BookCtr extends Controller
   
             // Insert to MySQL database
             foreach($importData_arr as $importData){
-                 DB::table('tbl_books')
-                 ->insert([
-                     '_prefix' => 'ACN'.date('Y'),
-                     'title' => $importData[3],
-                   //  'publisher' => $importData[3],
-                     'edition' => $importData[1],
-                     'no_of_pages' => $importData[2],
-                     'is_weed' => 0
-                 ]);
+                DB::table('tbl_books')
+                ->insert([
+                    'accession_no' => $importData[0],
+                    'title' => $importData[1],
+                    'author' => $importData[2],
+                    'publisher' => $importData[3],
+                    'copies' => $importData[4],
+                    'category_id' => $importData[5],
+                    'edition' => $importData[6],
+                    'no_of_pages' => $importData[7],
+                    'amount_if_lost' => $importData[8],
+                    'cost' => $importData[9],
+                    'date_acq' => $importData[10],
+                    'date_published' => $importData[11],
+                    'is_weed' => 0
+                ]);
   
             }
   

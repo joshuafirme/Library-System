@@ -99,6 +99,97 @@
   </div>
 </div>
 
+
+<!--Edit Modal-->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Book Information</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <div class="row">
+            
+            <div class="col-6 mb-2">
+              <label class="col-form-label">Accession Number</label>
+              <a class="form-control" name="accession_no"></a>
+            </div>
+
+            <div class="col-6">
+                <label class="col-form-label">Title</label>
+                <a class="form-control" name="title"></a>
+              </div>
+
+              <div class="col-6 mb-2">
+                <label class="col-form-label">Author</label>
+                <a class="form-control" name="author"></a>
+              </div>
+
+              <div class="col-6">
+                <label class="col-form-label">Publisher</label>
+                <a class="form-control" name="publisher"></a>
+              </div>
+  
+              <div class="col-4">
+                <label class="col-form-label">Category</label>
+                <a class="form-control" name="category"></a>
+              </div>
+
+              <div class="col-4 mb-2">
+                <label class="col-form-label">Classification</label>
+                <a  class="form-control" name="classification"></a>
+              </div>
+
+              <div class="col-4">
+                <label class="col-form-label">Edition</label>
+                <a class="form-control" name="edition"></a>
+              </div>
+
+              <div class="col-4 mb-2">
+                <label class="col-form-label">Number of copies</label>
+                <a class="form-control" name="copies"></a>
+              </div>
+
+              <div class="col-4">
+                <label class="col-form-label">Number of pages</label>
+                <a type="number" class="form-control" name="no_of_pages"></a>
+              </div>
+
+              <div class="col-4">
+                <label class="col-form-label">Amount if lost</label>
+                <a type="number" class="form-control" name="amount_if_lost"></a>
+              </div>
+
+              <div class="col-4 mb-2">
+                <label class="col-form-label">Cost</label>
+                <a type="number" class="form-control" name="cost"></a>
+              </div>
+
+              <div class="col-4">
+                <label class="col-form-label">Date Acquire</label>
+                <a type="date" class="form-control" name="date_acq"></a>
+              </div>
+
+              <div class="col-4">
+                <label class="col-form-label">Date published</label>
+                <a type="date" class="form-control" name="date_published"></a>
+              </div>
+
+          </div>
+
+      </div>
+      <div class="modal-footer">
+
+              <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--Edit Modal-->
 <div class="modal fade" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">

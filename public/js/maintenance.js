@@ -74,6 +74,12 @@ $(document).ready(function()
               });
        }
 
+       $(document).on('click', '#btn-view-book', function()
+       {     
+           let id = $(this).attr('book-id');
+           getBookDetails(id);
+       });
+
 
        $(document).on('click', '#btn-edit-book', function()
        {     
@@ -101,6 +107,8 @@ $(document).ready(function()
          
                success:function(data){
                    console.log(data);
+
+                // editing
                  $('#id_hidden').val(id);
                  $('#accession_no').val(data[0].accession_no);
                  $('#title').val(data[0].title);
@@ -117,6 +125,23 @@ $(document).ready(function()
                  $('#cost').val(data[0].cost);
                  $('#date_acq').val(data[0].date_acq);
                  $('#date_published').val(data[0].date_published);
+                
+                 // viewing
+                 $('a[name="accession_no"]').text(data[0].accession_no);
+                 $('a[name="title"]').text(data[0].title);
+                 $('a[name="author"]').text(data[0].author);
+                
+                 $('a[name="category"]').text(data[0].category);
+                 $('a[name="classification"]').text(data[0].classification);
+
+                 $('a[name="publisher"]').text(data[0].publisher);
+                 $('a[name="edition"').text(data[0].edition);
+                 $('a[name="no_of_pages"]').text(data[0].no_of_pages);
+                 $('a[name="copies"]').text(data[0].copies);
+                 $('a[name="amount_if_lost"]').text(data[0].amount_if_lost);
+                 $('a[name="cost"]').text(data[0].cost);
+                 $('a[name="date_acq"]').text(data[0].date_acq);
+                 $('a[name="date_published"]').text(data[0].date_published);
                }
               });
        }
