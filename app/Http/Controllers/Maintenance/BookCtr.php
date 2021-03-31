@@ -222,7 +222,10 @@ class BookCtr extends Controller
             fclose($file);
   
             // Insert to MySQL database
-            foreach($importData_arr as $importData){
+            foreach($importData_arr as $importData)
+            {
+                $category_id = $this->getCategoryID($importData[5], $importData[12]);
+
                 DB::table('tbl_books')
                 ->insert([
                     'accession_no' => $importData[0],
@@ -230,7 +233,7 @@ class BookCtr extends Controller
                     'author' => $importData[2],
                     'publisher' => $importData[3],
                     'copies' => $importData[4],
-                    'category_id' => $importData[5],
+                    'category_id' => $category_id,
                     'edition' => $importData[6],
                     'no_of_pages' => $importData[7],
                     'amount_if_lost' => $importData[8],
