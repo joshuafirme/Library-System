@@ -134,12 +134,12 @@ class ReserveCtr extends Controller
                 'is_approve' => 1
             ]);
 
-            return redirect('/approve-reservation')->with('success', 'Reservation was approved');
+            return redirect('/approve-reservation')->with('success', 'Reservation was approved successfully');
         }
        
     }
 
-    public function declineReservation($user_id, $accession_no)
+    public function declineReservation()
     {
         $data = Input::all();
 
@@ -148,6 +148,8 @@ class ReserveCtr extends Controller
                 ->where('accession_no', $data['accession_no'])
                 ->update([
                     'is_approve' => -1
-                ]); 
+                ]);
+                
+        return redirect('/approve-reservation')->with('success', 'Reservation was declined successfully');
     }
 }

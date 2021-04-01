@@ -134,8 +134,8 @@
         </div>
         <form action="{{ action('Transaction\ReserveCtr@declineReservation') }}" method="POST">
           @csrf
-        <input type="hidden" id="user_id" name="user_id">
-        <input type="hidden" id="acn_no" name="accession_no">
+        <input type="hidden" id="user_id1" name="user_id">
+        <input type="hidden" id="acn_no1" name="accession_no">
         <div class="modal-footer">
           <button class="btn btn-sm btn-outline-dark" type="submit">Yes</button>
           <button class="btn btn-sm btn-danger cancel-delete" data-dismiss="modal">Cancel</button>

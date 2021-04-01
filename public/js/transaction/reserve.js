@@ -154,6 +154,19 @@ $(document).ready(function()
         console.log(accession_no);
     });
 
+    $(document).on('click', '#btn-decline', function()
+    {   
+        let user_id, accession_no; 
+
+        user_id = $(this).attr('user-id');
+        accession_no = $(this).attr('accession-no');
+        
+        $('#user_id1').val(user_id);
+        $('#acn_no1').val(accession_no);
+        console.log(user_id);
+        console.log(accession_no);
+    });
+
 
 
 });
