@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Utilities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB, Input, Hash, Auth;
+use DB, Input, Hash, Auth, base;
 
 class UserCtr extends Controller
 {
@@ -177,18 +177,12 @@ class UserCtr extends Controller
         }
     }
 
-    function importStudent(Request $request)
+    function import(Request $request)
     {
         $file = $request->file('file');
-        base::importCSV($file);
+        $user_type = $request->input('user_type');
 
-        return redirect('/user-maintenance')->with('success', 'Student information imported successfully!');          
-    }
-
-    function importTeacher(Request $request)
-    {
-        $file = $request->file('file');
-        base::importCSV($file);
+        base::CSVImporter($file, $user_type);
 
         return redirect('/user-maintenance')->with('success', 'Student information imported successfully!');          
     }

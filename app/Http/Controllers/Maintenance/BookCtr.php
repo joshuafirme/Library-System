@@ -44,7 +44,7 @@ class BookCtr extends Controller
     public function getBooks()
     {
        return DB::table('tbl_books AS B')
-                ->select('B.*', 'category', 'classification')
+                ->select('B.id', 'B.accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published')
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
                 ->orderBy('id', 'asc')
                 ->where('is_weed', 0)
@@ -170,5 +170,11 @@ class BookCtr extends Controller
         base::recordAction(Auth::id(), 'Maintenance', 'import');
 
         return redirect('/book-maintenance')->with('success', 'Data imported successfully!');          
+    }
+
+    function export()
+    {
+        base::CSVExporter($this->getBooks());
+        base::recordAction(Auth::id(), 'Maintenance', 'export');         
     }
 }

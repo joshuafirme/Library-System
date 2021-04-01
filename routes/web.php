@@ -46,6 +46,7 @@ Route::get('/opac', 'OpacCtr@index');
 Route::get('/book-maintenance', 'Maintenance\BookCtr@index');
 Route::post('/book-maintenance/store', 'Maintenance\BookCtr@store');
 Route::post('/book-maintenance/import', 'Maintenance\BookCtr@import');
+Route::post('/book-maintenance/export', 'Maintenance\BookCtr@export');
 Route::post('/book-maintenance/update', 'Maintenance\BookCtr@update');
 Route::get('/book-details/{id}', 'Maintenance\BookCtr@getBookDetails');
 Route::post('/book-maintenance/weed', 'Maintenance\BookCtr@weed');
@@ -134,6 +135,7 @@ Route::post('/user-maintenance/store', 'Utilities\UserCtr@store');
 Route::post('/user-maintenance/update', 'Utilities\UserCtr@update');
 Route::get('/user-details/{user_id}', 'Utilities\UserCtr@getUserDetails');
 Route::post('/user-maintenance/archive', 'Utilities\UserCtr@archive');
+Route::post('/user-maintenance/import', 'Utilities\UserCtr@import');
 
 Route::get('/audit-trail', 'Utilities\AuditTrailCtr@index');
 

@@ -24,10 +24,18 @@
       
               <div class="row">
       
-                <div class="col-sm-2 col-md-2 col-lg-10 mb-3">
-                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addBookModal" id="btn-add-book"><span class='fa fa-plus'></span> Add book</button> 
-                  <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#importModal"><span class='fa fa-file-excel'></span> Import</button> 
+                <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addBookModal" id="btn-add-book"><span class='fa fa-plus'></span> Add book</button> 
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#importModal"><span class='fa fa-file-excel'></span> Import</button> 
+
                   </div>
+
+                  <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
+                    <form action="{{ action('Maintenance\BookCtr@export') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <button type="submit" class="btn btn-success btn-sm"><span class='fa fa-file-export'></span> Export</button> 
+                    </form>
+                    </div>
       
                 <div class="col-md-12 col-lg-12">
         

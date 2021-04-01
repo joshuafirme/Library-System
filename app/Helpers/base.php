@@ -223,13 +223,13 @@ class base
              {
                 self::importBook($importData_arr);
              }
-             else if($table_import == 'student')
+             else if($table_import == 1)
              {
-                self::importStudent($importData_arr);
+                self::importTeacher($importData_arr);
              }
              else
              {
-              //  self::importTeacher($importData_arr);
+                self::importStudent($importData_arr);
              }
              
 
@@ -276,22 +276,78 @@ class base
 
     public static function importStudent($importData_arr)
     {
-    
-        foreach($importData_arr as $data_col)
-        {            
+        if(!self::isUserExist($user_id))
+        {
+            foreach($importData_arr as $data_col)
+            {            
+                        
+                DB::table('tbl_user')
+                    ->insert([
+                        'user_id' => $data_col[0],
+                        'name' => $data_col[1],
+                        'password' => \Hash::make($data_col[0]),
+                        'contact_no' => $data_col[2],
+                        'address' => $data_col[3],
+                        'user_type' => 2,
+                        'archive_status' => 0
+                    ]);
                     
-            DB::table('tbl_books')
-                ->insert([
-                    'user_id' => $data_col[0],
-                    'name' => $data_col[1],
-                    'password' => \Hash::make($data_col[0]),
-                    'contact_no' => $data_col[2],
-                    'address' => $data_col[3],
-                    'user_type' => 2,
-                    'archive_statis' => 0
-                ]);     
-        }    
-       
+                    DB::table('tbl_grade')
+                    ->insert([
+                        'user_id' => $data_col[0],
+                        'grade' => $data_col[4]
+                    ]);   
+            }    
+        }   
+    }
+
+    public static function importTeacher($importData_arr)
+    {
+        if(!self::isUserExist($user_id))
+        {
+            foreach($importData_arr as $data_col)
+            {            
+                        
+                DB::table('tbl_user')
+                    ->insert([
+                        'user_id' => $data_col[0],
+                        'name' => $data_col[1],
+                        'password' => \Hash::make($data_col[0]),
+                        'contact_no' => $data_col[2],
+                        'address' => $data_col[3],
+                        'user_type' => 2,
+                        'archive_status' => 0
+                    ]);
+                    
+                    DB::table('tbl_department')
+                    ->insert([
+                        'user_id' => $data_col[0],
+                        'department' => $data_col[4]
+                    ]);   
+            } 
+        }         
+    }
+
+    public static function CSVExporter($users)
+    {  
+        header('Content-Type: text/csv; charset=utf-8'); 
+        header('Content-Disposition: attachment; filename=Books.csv'); 
+        $output = fopen('php://output', 'w'); 
+        fputcsv($output, array('id', 'accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published')); 
+            if (count($users) > 0) 
+            { 
+                foreach ($users as $row) 
+                { 
+                    fputcsv($output, (array) $row); 
+                } 
+            }
+    }
+
+    public static function isUserExist($user_id)
+    {
+        $row = DB::table('tbl_users')->where('user_id', $user_id);
+
+        return $row->count() > 0 ? true : false;
     }
     
     public static function getCategoryID($category, $classification)
