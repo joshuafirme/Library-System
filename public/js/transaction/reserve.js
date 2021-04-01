@@ -66,13 +66,14 @@ $(document).ready(function()
        $(document).on('change', '#reservation_date', function()
        {     
            let res_date = $(this).val();
+           
+           console.log(getCurrentDatePlusOneWeek());
            if(res_date < getCurrentDate()){
                alert('You cannot reserve that date!');
                $('#reservation_date').val(getCurrentDate());
            }
            else if(getCurrentDatePlusOneWeek() < res_date ){
             alert('You cannot reserve more than 7 days!');
-            console.log(getCurrentDatePlusOneWeek());
             $('#reservation_date').val(getCurrentDate());
         }
            
@@ -93,8 +94,9 @@ $(document).ready(function()
         var d = new Date();
 
         var month = d.getMonth()+1;
-        var day = d.getDate();
+        var day = d.getDate()+7;
 
+        /*
         let next_month_days=0;
         let week_days = 7;
         var days;
@@ -110,11 +112,11 @@ $(document).ready(function()
             else{
                 days = day;
             }
-          }
+          }*/
  
         return d.getFullYear() + '-' +
             (month<10 ? '0' : '') + month + '-' +
-            (days<10 ? '0' : '') + days;
+            (day<10 ? '0' : '') + day;
        }
 
 
