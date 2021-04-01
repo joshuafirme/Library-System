@@ -44,7 +44,7 @@ class BookCtr extends Controller
     public function getBooks()
     {
        return DB::table('tbl_books AS B')
-                ->select('B.id', 'B.accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published')
+                ->select('B.id', 'B.accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published', 'ISBN')
                 ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
                 ->orderBy('id', 'asc')
                 ->where('is_weed', 0)
@@ -74,6 +74,7 @@ class BookCtr extends Controller
             'cost' => $data['cost'],
             'date_acq' => $data['date_acq'],
             'date_published' => $data['date_published'],
+            'ISBN' => $data['ISBN'],
             'is_weed' => 0
         ]); 
         
@@ -115,6 +116,7 @@ class BookCtr extends Controller
                 'cost' => $data['cost'],
                 'date_acq' => $data['date_acq'],
                 'date_published' => $data['date_published'],
+                'ISBN' => $data['ISBN'],
                 'is_weed' => 0
             ]);
 

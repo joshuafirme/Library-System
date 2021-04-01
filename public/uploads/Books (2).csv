@@ -1,0 +1,12 @@
+id,accession_no,title,author,publisher,copies,category,classification,edition,no_of_pages,amount_if_lost,cost,date_acq,date_published
+8,B00003,"Encyclopedia Britannica Volume 1 - Knowledge in Depth","Charlotte Stowell","Encyclopedia Britannica, Inc.",11,"General Reference",Encyclopedia,14th,154,400.00,200.00,2020-12-14,2015-02-13
+9,B00004,"Math Beyond Excellence","Lany A. Osano","McGraw Hill Companies Inc",1,Textbook,Mathematic,1st,434,500.00,200.00,2020-12-09,2013-02-01
+10,B00005,"Encyclopedia Britannica Book of the Year 1981","Harry Montez","Encyclopedia Britannica, Inc.",7,"General Reference",Encyclopedia,1st,766,1000.00,800.00,2020-11-19,1981-02-10
+11,00006,"The Education Act","Joseph Noel M. Estrada","Rex Printing Company, Inc.",4,"General Reference",Encyclopedia,3rd,968,750.00,400.00,2020-10-14,2019-04-19
+12,00007,"What Successful People Know About Leadership","John C. Maxwell","Hachette Book Group, Inc.",7,"General Reference",Almanac,1st,156,500.00,400.00,2020-12-04,2016-06-07
+13,00008,"Pocket Dictionary - an English-Tagalog Vocabulary","Felix Macapinlac Manalili et al.","R. Manalili Gen. Mdse.",3,"General Reference",Dictionary,1st,216,400.00,250.00,2020-08-07,1982-06-16
+14,00009,"The Third Twin","Ken Follet","Crown Publishers Inc.",4,"General Reference",Encyclopedia,2nd,422,600.00,400.00,2020-10-02,1996-09-05
+15,00010,"The Cuckoo's Calling","Robert Galbraith",Sphere,2,"General Reference",Almanac,3rd,449,500.00,300.00,2020-10-14,2013-07-19
+16,00011,"Health & Wellness California","Linda Meeks, et.al","McGraw Hill Companies Inc.",3,Textbook,Mathematic,2nd,31,400.00,250.00,2020-10-08,2006-07-21
+1414,00012,test,test,test,2,Textbook,Mathematic,test,3,2.00,12.00,2021-03-19,2021-03-01
+1833,test0001,test,test,test,12,Textbook,Mathematic,test,23,333.00,2.00,2021-03-26,2021-03-26

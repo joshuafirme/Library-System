@@ -22,6 +22,7 @@ $(document).ready(function()
             {data: 'copies', name: 'copies'},
             {data: 'date_acq', name: 'date_acq'},
             {data: 'date_published', name: 'date_published'},
+            {data: 'ISBN', name: 'ISBN'},
             {data: 'action', name: 'action', orderable:false},
            ]
 
@@ -125,6 +126,7 @@ $(document).ready(function()
                  $('#cost').val(data[0].cost);
                  $('#date_acq').val(data[0].date_acq);
                  $('#date_published').val(data[0].date_published);
+                 $('#ISBN').val(data[0].ISBN);
                 
                  // viewing
                  $('a[name="accession_no"]').text(data[0].accession_no);
@@ -142,6 +144,7 @@ $(document).ready(function()
                  $('a[name="cost"]').text(data[0].cost);
                  $('a[name="date_acq"]').text(data[0].date_acq);
                  $('a[name="date_published"]').text(data[0].date_published);
+                 $('a[name="ISBN"]').text(data[0].ISBN);
                }
               });
        }
