@@ -251,22 +251,22 @@ class base
         foreach($importData_arr as $data_col)
         {
                                             
-            $category_id = self::getCategoryID($data_col[6], $data_col[7]); // get the category and classification params to get category id
+            $category_id = self::getCategoryID($data_col[5], $data_col[6]); // get the category and classification params to get category id
                     
             DB::table('tbl_books')
                 ->insert([
-                    'accession_no' => $data_col[1],
-                    'title' => $data_col[2],
-                    'author' => $data_col[3],
-                    'publisher' => $data_col[4],
-                    'copies' => $data_col[5],
+                    'accession_no' => $data_col[0],
+                    'title' => $data_col[1],
+                    'author' => $data_col[2],
+                    'publisher' => $data_col[3],
+                    'copies' => $data_col[4],
                     'category_id' => $category_id,
-                    'edition' => $data_col[8],
-                    'no_of_pages' => $data_col[9],
-                    'amount_if_lost' => $data_col[10],
-                    'cost' => $data_col[11],
-                    'date_acq' => date("Y-m-d", strtotime($data_col[12])),
-                    'date_published' => date("Y-m-d", strtotime($data_col[13])),
+                    'edition' => $data_col[7],
+                    'no_of_pages' => $data_col[8],
+                    'amount_if_lost' => $data_col[9],
+                    'cost' => $data_col[10],
+                    'date_acq' => date("Y-m-d", strtotime($data_col[11])),
+                    'date_published' => date("Y-m-d", strtotime($data_col[12])),
                     'is_weed' => 0
                 ]);     
    
@@ -360,7 +360,7 @@ class base
         header('Content-Type: text/csv; charset=utf-8'); 
         header('Content-Disposition: attachment; filename=book-export-'.date('Y-m-d h:s:m').'.csv'); 
         $output = fopen('php://output', 'w'); 
-        fputcsv($output, array('id', 'accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published')); 
+        fputcsv($output, array('accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published')); 
             if (count($users) > 0) 
             { 
                 foreach ($users as $row) 

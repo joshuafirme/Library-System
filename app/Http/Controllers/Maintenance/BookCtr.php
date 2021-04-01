@@ -227,7 +227,17 @@ class BookCtr extends Controller
 
     function export()
     {
-        base::CSVExporter($this->getBooks());
+        base::CSVExporter($this->getBookData());
         base::recordAction(Auth::id(), 'Maintenance', 'export');         
+    }
+
+    public function getBookData()
+    {
+       return DB::table('tbl_books AS B')
+                ->select('B.accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published', 'ISBN')
+                ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
+                ->orderBy('B.id', 'asc')
+                ->where('is_weed', 0)
+                ->get();
     }
 }
