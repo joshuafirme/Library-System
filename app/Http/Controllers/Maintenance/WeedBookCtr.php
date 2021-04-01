@@ -63,6 +63,13 @@ class WeedBookCtr extends Controller
                 'copies' => DB::raw('copies - '.$data['copies']),
                 'updated_at' => date('Y-m-d h:m:s')
             ]);
+
+            if($this->getWeedCopies($data['id_retrieve']) == 0)
+            {
+                DB::table('tbl_weed')
+                ->where('id', $data['id_retrieve'])
+                ->delete();
+            }
         }
 
         \app\Helpers\base::recordAction(Auth::id(), 'Weed Maintenance', 'retrieve');
