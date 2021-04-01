@@ -94,6 +94,13 @@ class BookCtr extends Controller
                 ->get();
     }
 
+    public function getBookCopies($id)
+    {
+        return DB::table('tbl_books')
+                ->where('id', $id)
+                ->value('copies');
+    }
+
     public function update()
     {
         $data = Input::all();
@@ -129,16 +136,60 @@ class BookCtr extends Controller
     public function weed()
     {
         $data = Input::all();
-        DB::table('tbl_books')
+
+
+        if($this->getBookCopies($data['id_weed']) < $data['copies'])
+        {
+            return redirect('/book-maintenance')->with('danger', 'The copy entered was greater than book copies. Please enter a valid value!');
+        }
+        else{
+            
+            DB::table('tbl_books')
             ->where('id', $data['id_weed'])
             ->update([
-                'is_weed' => 1,
+                'copies' => DB::raw('copies - '.$data['copies']),
                 'updated_at' => date('Y-m-d h:m:s')
-            ]);
+                ]);
 
-            base::recordAction(Auth::id(), 'Book Maintenance', 'weed');
+            if($this->isWeed($data['id_weed']))
+            {
+                DB::table('tbl_weed')
+                ->where('book_id', $data['id_weed'])
+                ->update([
+                    'copies' => DB::raw('copies + '.$data['copies']),
+                    'updated_at' => date('Y-m-d h:m:s')
+                ]);
+            }else{
+                DB::table('tbl_weed')
+                ->insert([
+                    'book_id' => $data['id_weed'],
+                    'copies' => $data['copies'],
+                    'created_at' => date('Y-m-d h:m:s')
+                ]);
+            }
+        }
+
+        if($this->getBookCopies($data['id_weed']) == 0)
+        {
+            DB::table('tbl_books')
+            ->where('id', $data['id_weed'])
+            ->update([
+                'is_weed' => 1
+            ]);
+        }
+        
+        base::recordAction(Auth::id(), 'Book Maintenance', 'weed');
 
         return redirect('/book-maintenance')->with('success', 'Book weed successfully');
+    }
+
+    public function isWeed($id)
+    {
+        $data = Input::all();
+
+        $row=DB::table('tbl_weed')
+            ->where('book_id', $id)->get();
+        return $row->count() > 0 ? true : false;
     }
 
     public function getAccessionNo()

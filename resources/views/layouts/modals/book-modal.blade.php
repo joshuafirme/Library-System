@@ -344,10 +344,12 @@
         </div>
         <div class="modal-body">
           <p>Are you sure do you want to weed this book?</p>
+          <form action="{{ action('Maintenance\BookCtr@weed') }}" method="POST">
+            @csrf
+          <input type="hidden" id="id_weed" name="id_weed">
+          <input type="number" class="form-control" name="copies" min="1" placeholder="copies">
         </div>
-        <form action="{{ action('Maintenance\BookCtr@weed') }}" method="POST">
-          @csrf
-        <input type="hidden" id="id_weed" name="id_weed">
+
         <div class="modal-footer">
           <button class="btn btn-sm btn-outline-dark" type="submit">Yes</button>
           <button class="btn btn-sm btn-danger cancel-delete" data-dismiss="modal">Cancel</button>

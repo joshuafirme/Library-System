@@ -49,8 +49,7 @@ $(document).ready(function()
                {data: 'classification', name: 'classification'},
                {data: 'edition', name: 'edition'},
                {data: 'copies', name: 'copies'},
-               {data: 'date_acq', name: 'date_acq'},
-               {data: 'date_published', name: 'date_published'},
+               {data: 'created_at', name: 'created_at'},
                {data: 'action', name: 'action',orderable:false},
               ]
    

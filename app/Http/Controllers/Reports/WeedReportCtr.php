@@ -28,11 +28,11 @@ class WeedReportCtr extends Controller
 
     public function getWeedBooks()
     {
-       return DB::table('tbl_books AS B')
-                ->select('B.*', 'category','classification')
-                ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
-                ->where('is_weed', 1)
-                ->get();
+        return DB::table('tbl_weed AS W')
+            ->select('B.*', 'W.*', 'category','classification')
+            ->leftJoin('tbl_books AS B', 'B.id', '=', 'W.book_id')
+            ->leftJoin('tbl_category AS C', 'C.id', '=', 'B.category_id')
+            ->get();
     }
 
     public function previewReport()
