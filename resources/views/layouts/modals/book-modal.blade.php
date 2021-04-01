@@ -86,6 +86,11 @@
                 <input type="date" class="form-control" name="date_published" required>
               </div>
 
+              <div class="col-12">
+                <label class="col-form-label">International Standard Book Number (ISBN)</label>
+                <input type="text" class="form-control" name="ISBN" required placeholder="ex. 978-3-16-148410-0">
+              </div>
+
           </div>
 
       </div>
@@ -177,6 +182,11 @@
               <div class="col-4">
                 <label class="col-form-label">Date published</label>
                 <a type="date" class="form-control" name="date_published"></a>
+              </div>
+
+              <div class="col-12">
+                <label class="col-form-label">International Standard Book Number (ISBN)</label>
+                <a class="form-control" name="ISBN"></a>
               </div>
 
           </div>
@@ -275,6 +285,11 @@
               <div class="col-4">
                 <label class="col-form-label">Date published</label>
                 <input type="date" class="form-control" name="date_published" id="date_published" required>
+              </div>
+
+              <div class="col-12">
+                <label class="col-form-label">International Standard Book Number (ISBN)</label>
+                <input type="text" class="form-control" name="ISBN" id="ISBN" required placeholder="ex. 978-3-16-148410-0">
               </div>
 
           </div>
