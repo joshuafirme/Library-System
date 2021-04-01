@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Utilities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB, Input, Hash, Auth, base;
+use DB, Input, Hash, Auth;
+use App\Helpers\base;
 
 class UserCtr extends Controller
 {
@@ -183,8 +184,18 @@ class UserCtr extends Controller
         $user_type = $request->input('user_type');
 
         base::CSVImporter($file, $user_type);
+        $no_of_duplicates = \Session::get('NO_OF_DUPLICATES');
 
-        return redirect('/user-maintenance')->with('success', 'Student information imported successfully!');          
+       if($no_of_duplicates>0)
+       {
+        return redirect('/user-maintenance')
+        ->with('success', 'Student information imported successfully! There are '.$no_of_duplicates.' user is not imported because user already exists.');   
+       }
+       else
+       {
+        return redirect('/user-maintenance')
+        ->with('success', 'Student information imported successfully!');   
+       }
     }
 
 

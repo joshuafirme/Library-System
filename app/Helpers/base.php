@@ -276,56 +276,83 @@ class base
 
     public static function importStudent($importData_arr)
     {
-        if(!self::isUserExist($user_id))
-        {
+        $num_of_duplicate = 0;
+
             foreach($importData_arr as $data_col)
-            {            
+            {  
+                if(!self::isUserExist($data_col[0]))
+                {          
                         
-                DB::table('tbl_user')
-                    ->insert([
-                        'user_id' => $data_col[0],
-                        'name' => $data_col[1],
-                        'password' => \Hash::make($data_col[0]),
-                        'contact_no' => $data_col[2],
-                        'address' => $data_col[3],
-                        'user_type' => 2,
-                        'archive_status' => 0
-                    ]);
-                    
-                    DB::table('tbl_grade')
-                    ->insert([
-                        'user_id' => $data_col[0],
-                        'grade' => $data_col[4]
-                    ]);   
-            }    
-        }   
+                    DB::table('tbl_users')
+                        ->insert([
+                            'user_id' => $data_col[0],
+                            'name' => $data_col[1],
+                            'password' => \Hash::make($data_col[2]),
+                            'contact_no' => $data_col[3],
+                            'address' => $data_col[4],
+                            'user_type' => 2,
+                            'archive_status' => 0
+                        ]);
+                       
+                        if(!self::isGradeExists($data_col[0]))
+                        {
+                            DB::table('tbl_grade')
+                            ->insert([
+                                'user_id' => $data_col[0],
+                                'grade' => $data_col[5]
+                            ]);   
+                        } 
+                }
+                else{
+                    $num_of_duplicate++;           
+                }    
+            }
+
+            Session::put('NO_OF_DUPLICATES',$num_of_duplicate);
+                       
+    }
+
+    public static function isGradeExists($user_id){
+        $row=DB::table('tbl_grade')
+        ->where('user_id', $user_id)->get();  
+        return $row->count()>0 ? true : false;
     }
 
     public static function importTeacher($importData_arr)
     {
         if(!self::isUserExist($user_id))
         {
-            foreach($importData_arr as $data_col)
-            {            
+            if(!self::isUserExist($data_col[0]))
+            {          
                         
-                DB::table('tbl_user')
+                DB::table('tbl_users')
                     ->insert([
                         'user_id' => $data_col[0],
                         'name' => $data_col[1],
-                        'password' => \Hash::make($data_col[0]),
-                        'contact_no' => $data_col[2],
-                        'address' => $data_col[3],
+                        'password' => \Hash::make($data_col[2]),
+                        'contact_no' => $data_col[3],
+                        'address' => $data_col[4],
                         'user_type' => 2,
                         'archive_status' => 0
                     ]);
                     
-                    DB::table('tbl_department')
-                    ->insert([
-                        'user_id' => $data_col[0],
-                        'department' => $data_col[4]
-                    ]);   
-            } 
-        }         
+                    if(!self::isDepartmentExists($data_col[0]))
+                    {
+                        DB::table('tbl_department')
+                        ->insert([
+                            'user_id' => $data_col[0],
+                            'department' => $data_col[5]
+                        ]);   
+                    } 
+                  
+                }     
+            }      
+    }
+
+    public static function isDepartmentExists($user_id){
+        $row=DB::table('tbl_grade')
+        ->where('user_id', $user_id)->get();  
+        return $row->count()>0 ? true : false;
     }
 
     public static function CSVExporter($users)
