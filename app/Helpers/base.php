@@ -299,7 +299,7 @@ class base
                         {
                             DB::table('tbl_grade')
                             ->insert([
-                                'user_id' => $data_col[1],
+                                'user_id' => $data_col[0],
                                 'grade' => $data_col[4]
                             ]);   
                         } 
@@ -343,7 +343,7 @@ class base
                     {
                         DB::table('tbl_dept')
                         ->insert([
-                            'user_id' => $data_col[1],
+                            'user_id' => $data_col[0],
                             'department' => $data_col[4]
                         ]);   
                     } 

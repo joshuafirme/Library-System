@@ -48,7 +48,7 @@ class ReserveCtr extends Controller
 
         if(base::hasOneLeftBook($data['accession_no']))
         {
-            return redirect('/reserve-book')->with('danger', 'Borrow denied! The book have only 1 copy remaining.');
+            return redirect('/reserve-book')->with('danger', 'Reservation denied! The book have only 1 copy remaining.');
         }
         else{
             if(base::isBookAlreadyReserved(Auth::id(), $data['accession_no']))
@@ -124,7 +124,7 @@ class ReserveCtr extends Controller
 
         if(base::hasOneLeftBook($data['accession_no']))
         {
-            return redirect('/reserve-book')->with('danger', 'Borrow denied! The book have only 1 copy remaining.');
+            return redirect('/reserve-book')->with('danger', 'Approval denied! The book have only 1 copy remaining.');
         }
         else{
             $row = DB::table('tbl_book_reserve')
