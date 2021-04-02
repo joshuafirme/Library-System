@@ -227,7 +227,7 @@ class BookCtr extends Controller
 
     function export()
     {
-        base::CSVExporter($this->getBookData());
+        base::CSVExporter($this->getBookData(),'Book');
         base::recordAction(Auth::id(), 'Maintenance', 'export');         
     }
 

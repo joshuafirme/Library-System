@@ -280,14 +280,14 @@ class base
 
             foreach($importData_arr as $data_col)
             {  
-                if(!self::isUserExist($data_col[0]))
+                if(!self::isUserExist($data_col[1]))
                 {          
                         
                     DB::table('tbl_users')
                         ->insert([
-                            'user_id' => $data_col[0],
-                            'name' => $data_col[1],
-                            'password' => \Hash::make($data_col[2]),
+                            'user_id' => $data_col[1],
+                            'name' => $data_col[2],
+                            'password' => \Hash::make($data_col[1]),
                             'contact_no' => $data_col[3],
                             'address' => $data_col[4],
                             'user_type' => 2,
@@ -322,14 +322,14 @@ class base
     {
         if(!self::isUserExist($user_id))
         {
-            if(!self::isUserExist($data_col[0]))
+            if(!self::isUserExist($data_col[1]))
             {          
                         
                 DB::table('tbl_users')
                     ->insert([
-                        'user_id' => $data_col[0],
-                        'name' => $data_col[1],
-                        'password' => \Hash::make($data_col[2]),
+                        'user_id' => $data_col[1],
+                        'name' => $data_col[2],
+                        'password' => \Hash::make($data_col[1]),
                         'contact_no' => $data_col[3],
                         'address' => $data_col[4],
                         'user_type' => 2,
@@ -340,7 +340,7 @@ class base
                     {
                         DB::table('tbl_department')
                         ->insert([
-                            'user_id' => $data_col[0],
+                            'user_id' => $data_col[1],
                             'department' => $data_col[5]
                         ]);   
                     } 
@@ -349,18 +349,43 @@ class base
             }      
     }
 
-    public static function isDepartmentExists($user_id){
+    public static function isDepartmentExists($user_id)
+    {
         $row=DB::table('tbl_grade')
         ->where('user_id', $user_id)->get();  
         return $row->count()>0 ? true : false;
     }
 
-    public static function CSVExporter($users)
+    public static function getUserGrade($user_id)
+    {
+        return DB::table('tbl_grade')
+                ->where('user_id', $user_id)->value('grade'); 
+    }
+
+    public static function getUserDepartment($user_id)
+    {
+        return DB::table('tbl_department')
+                ->where('user_id', $user_id)->value('department'); 
+    }
+
+    public static function CSVExporter($users, $type)
     {  
         header('Content-Type: text/csv; charset=utf-8'); 
         header('Content-Disposition: attachment; filename=book-export-'.date('Y-m-d h:s:m').'.csv'); 
         $output = fopen('php://output', 'w'); 
-        fputcsv($output, array('accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published')); 
+
+        if($type=='Book'){
+            fputcsv($output, array('accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published')); 
+        }
+        else if($type==1){
+            fputcsv($output, array('id', 'user_id', 'name', 'contact_no', 'address', 'department')); 
+
+        }
+        else{
+            fputcsv($output, array('id', 'user_id', 'name', 'contact_no', 'address', 'grade')); 
+
+        }
+
             if (count($users) > 0) 
             { 
                 foreach ($users as $row) 

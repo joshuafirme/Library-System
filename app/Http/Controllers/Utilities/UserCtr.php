@@ -198,6 +198,37 @@ class UserCtr extends Controller
        }
     }
 
+    function export(Request $request)
+    {
+
+        if($request->input('user_type') == 1)
+        {
+            base::CSVExporter($this->getTeacherData(),1); 
+        }else{
+            base::CSVExporter($this->getStudentData(),2); 
+        }       
+    }
+
+    public function getStudentData()
+    {
+       return DB::table('tbl_users as U')
+                ->select('U.id', 'U.user_id', 'U.name', 'contact_no', 'address', 'grade')
+                ->leftJoin('tbl_grade AS G', 'G.user_id', '=', 'U.user_id')
+                ->where('user_type', 2)
+                ->where('archive_status', 0)
+                ->get();
+    }
+
+    public function getTeacherData()
+    {
+        return DB::table('tbl_users as U')
+                ->select('U.id', 'U.user_id', 'U.name', 'contact_no', 'address', 'department')
+                ->leftJoin('tbl_dept AS D', 'D.user_id', '=', 'U.user_id')
+                ->where('user_type', 1)
+                ->where('archive_status', 0)
+                ->get();
+    }
+
 
     public function getUserDetails($user_id)
     {

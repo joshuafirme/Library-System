@@ -39,8 +39,11 @@
               <div class="row">
       
                 <div class="col-sm-2 col-md-2 col-lg-10 mb-3">
-                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUserModal" id="btn-user-book"><span class='fa fa-plus'></span> Add user</button> 
-                  <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#importModal"><span class='fa fa-file-excel'></span> Import</button> 
+
+                  <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUserModal" id="btn-user-book"><span class='fa fa-plus'></span> Add user</a> 
+                  <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#importModal"><span class='fa fa-file-excel'></span> Import</a> 
+                  <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exportModal"><span class='fa fa-file-export'></span> Export</button> 
+  
                   </div>
       
                 <div class="col-md-12 col-lg-12">
@@ -200,6 +203,41 @@
   
               <div class="modal-footer">
                 <button type="submit" class="btn btn-sm btn-success">Import</button>
+                <button class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+      </div>
+    </div>
+  </div>
+
+
+   <!--Expor Modal-->
+   <div class="modal fade" id="exportModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Export User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+          <div class="modal-body">
+            
+            <form action="{{ action('Utilities\UserCtr@export') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+
+              <label for="">User type</label>
+              <select class="form-control mb-4" name="user_type">
+                <option value="2">Student</option>
+                <option value="1">Teacher</option>
+              </select>
+              </div>
+  
+              <div class="modal-footer">
+                <form action="{{ action('Utilities\UserCtr@export') }}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                <button type="submit" class="btn btn-sm btn-success">Export</button>
+                </form>
                 <button class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
               </div>
             </form>

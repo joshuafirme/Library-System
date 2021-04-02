@@ -11,6 +11,24 @@
 |
 */
 
+
+Route::get('/storage/{extra}', function ($extra) {
+return redirect('/public/storage/$extra');
+})->where('extra', '.*');
+
+Route::get('/css/{extra}', function ($extra) {
+return redirect('/public/css/$extra');
+})->where('extra', '.*');
+
+Route::get('/img/{extra}', function ($extra) {
+return redirect('/public/img/$extra');
+})->where('extra', '.*');
+
+
+Route::get('/cache', function () {
+    Artisan::call('view:cache'); // this will do the command line job
+});
+
 /*
 |--------------------------------------------------------------------------
 | Login
@@ -136,6 +154,7 @@ Route::post('/user-maintenance/update', 'Utilities\UserCtr@update');
 Route::get('/user-details/{user_id}', 'Utilities\UserCtr@getUserDetails');
 Route::post('/user-maintenance/archive', 'Utilities\UserCtr@archive');
 Route::post('/user-maintenance/import', 'Utilities\UserCtr@import');
+Route::post('/user-maintenance/export', 'Utilities\UserCtr@export');
 
 Route::get('/audit-trail', 'Utilities\AuditTrailCtr@index');
 
