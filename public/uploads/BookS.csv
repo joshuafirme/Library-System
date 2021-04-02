@@ -1,0 +1,6 @@
+accession_no,title,author,publisher,copies,category_id,edition,no_of_pages,amount_if_lost,cost,date_acq,date_published,classification
+AS00020,algebra 1,Bryan Alvarez,Brenna Ramos,5,Textbook,3rd,220,200,100,5/6/2020,2/13/2015,Mathematic
+AS00022,algebra 2,Bryan Alvarez,Brenna Ramos,5,Textbook,2nd,310,200,100,6/6/2020,2/14/2015,Mathematic
+AS00021,algebra 3,Bryan Alvarez,Brenna Ramos,5,Textbook,3rd,355,350,230,7/6/2020,2/15/2015,Mathematic
+AS00023,algebra 4,Bryan Alvarez,Brenna Ramos,5,General Reference,7th,330,350,250,8/6/2020,2/16/2015,Dictionary
+AS00025,English 1,Bryan Alvarez,Brenna Ramos,5,General Reference,1st,430,400,250,9/6/2020,2/17/2015,Dictionary

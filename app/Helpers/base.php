@@ -267,6 +267,7 @@ class base
                     'cost' => $data_col[10],
                     'date_acq' => date("Y-m-d", strtotime($data_col[11])),
                     'date_published' => date("Y-m-d", strtotime($data_col[12])),
+                    'ISBN' => $data_col[13],
                     'is_weed' => 0
                 ]);     
    
@@ -285,21 +286,21 @@ class base
                         
                     DB::table('tbl_users')
                         ->insert([
-                            'user_id' => $data_col[1],
-                            'name' => $data_col[2],
-                            'password' => \Hash::make($data_col[1]),
-                            'contact_no' => $data_col[3],
-                            'address' => $data_col[4],
+                            'user_id' => $data_col[0],
+                            'name' => $data_col[1],
+                            'password' => \Hash::make($data_col[0]),
+                            'contact_no' => $data_col[2],
+                            'address' => $data_col[3],
                             'user_type' => 2,
                             'archive_status' => 0
                         ]);
                        
-                        if(!self::isGradeExists($data_col[0]))
+                        if(!self::isGradeExists($data_col[1]))
                         {
                             DB::table('tbl_grade')
                             ->insert([
-                                'user_id' => $data_col[0],
-                                'grade' => $data_col[5]
+                                'user_id' => $data_col[1],
+                                'grade' => $data_col[4]
                             ]);   
                         } 
                 }
@@ -320,28 +321,30 @@ class base
 
     public static function importTeacher($importData_arr)
     {
-        if(!self::isUserExist($user_id))
+        $num_of_duplicate = 0;
+
+        foreach($importData_arr as $data_col)
         {
             if(!self::isUserExist($data_col[1]))
             {          
                         
                 DB::table('tbl_users')
                     ->insert([
-                        'user_id' => $data_col[1],
-                        'name' => $data_col[2],
-                        'password' => \Hash::make($data_col[1]),
-                        'contact_no' => $data_col[3],
-                        'address' => $data_col[4],
-                        'user_type' => 2,
+                        'user_id' => $data_col[0],
+                        'name' => $data_col[1],
+                        'password' => \Hash::make($data_col[0]),
+                        'contact_no' => $data_col[2],
+                        'address' => $data_col[3],
+                        'user_type' => 1,
                         'archive_status' => 0
                     ]);
                     
-                    if(!self::isDepartmentExists($data_col[0]))
+                    if(!self::isDepartmentExists($data_col[1]))
                     {
-                        DB::table('tbl_department')
+                        DB::table('tbl_dept')
                         ->insert([
                             'user_id' => $data_col[1],
-                            'department' => $data_col[5]
+                            'department' => $data_col[4]
                         ]);   
                     } 
                   
@@ -371,18 +374,18 @@ class base
     public static function CSVExporter($users, $type)
     {  
         header('Content-Type: text/csv; charset=utf-8'); 
-        header('Content-Disposition: attachment; filename=book-export-'.date('Y-m-d h:s:m').'.csv'); 
+        header('Content-Disposition: attachment; filename=file-export-'.date('Y-m-d h:s:m').'.csv'); 
         $output = fopen('php://output', 'w'); 
 
         if($type=='Book'){
-            fputcsv($output, array('accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published')); 
+            fputcsv($output, array('accession_no', 'title', 'author', 'publisher', 'copies', 'category', 'classification', 'edition', 'no_of_pages', 'amount_if_lost', 'cost', 'date_acq', 'date_published','ISBN' )); 
         }
         else if($type==1){
-            fputcsv($output, array('id', 'user_id', 'name', 'contact_no', 'address', 'department')); 
+            fputcsv($output, array('user_id', 'name', 'contact_no', 'address', 'department')); 
 
         }
         else{
-            fputcsv($output, array('id', 'user_id', 'name', 'contact_no', 'address', 'grade')); 
+            fputcsv($output, array('user_id', 'name', 'contact_no', 'address', 'grade')); 
 
         }
 
