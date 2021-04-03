@@ -67,7 +67,7 @@ class WeedBookCtr extends Controller
             if($this->getWeedCopies($data['id_retrieve']) == 0)
             {
                 DB::table('tbl_weed')
-                ->where('id', $data['id_retrieve'])
+                ->where('book_id', $data['id_retrieve'])
                 ->delete();
             }
         }
