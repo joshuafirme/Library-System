@@ -275,13 +275,13 @@ class base
        
     }
 
-    public static function importStudent($importData_arr)
-    {
+        public static function importStudent($importData_arr)
+        {
         $num_of_duplicate = 0;
 
             foreach($importData_arr as $data_col)
             {  
-                if(!self::isUserExist($data_col[1]))
+                if(!self::isUserExist($data_col[0]))
                 {          
                         
                     DB::table('tbl_users')
@@ -295,7 +295,7 @@ class base
                             'archive_status' => 0
                         ]);
                        
-                        if(!self::isGradeExists($data_col[1]))
+                        if(!self::isGradeExists($data_col[0]))
                         {
                             DB::table('tbl_grade')
                             ->insert([
@@ -308,10 +308,8 @@ class base
                     $num_of_duplicate++;           
                 }    
             }
-
-            Session::put('NO_OF_DUPLICATES',$num_of_duplicate);
-                       
-    }
+            Session::put('NO_OF_DUPLICATES',$num_of_duplicate);                     
+        }
 
     public static function isGradeExists($user_id){
         $row=DB::table('tbl_grade')
@@ -325,7 +323,7 @@ class base
 
         foreach($importData_arr as $data_col)
         {
-            if(!self::isUserExist($data_col[1]))
+            if(!self::isUserExist($data_col[0]))
             {          
                         
                 DB::table('tbl_users')
@@ -339,7 +337,7 @@ class base
                         'archive_status' => 0
                     ]);
                     
-                    if(!self::isDepartmentExists($data_col[1]))
+                    if(!self::isDepartmentExists($data_col[0]))
                     {
                         DB::table('tbl_dept')
                         ->insert([
@@ -348,8 +346,13 @@ class base
                         ]);   
                     } 
                   
-                }     
-            }      
+                }
+                else{
+                    $num_of_duplicate++;           
+                }    
+                    
+            } 
+            Session::put('NO_OF_DUPLICATES',$num_of_duplicate);     
     }
 
     public static function isDepartmentExists($user_id)

@@ -189,7 +189,7 @@ class UserCtr extends Controller
        if($no_of_duplicates>0)
        {
         return redirect('/user-maintenance')
-        ->with('success', 'Student information imported successfully! There are '.$no_of_duplicates.' user is not imported because user already exists.');   
+        ->with('success', 'Student information imported successfully! There are '.$no_of_duplicates.' user are not imported because the user is already exists.');   
        }
        else
        {
@@ -212,7 +212,7 @@ class UserCtr extends Controller
     public function getStudentData()
     {
        return DB::table('tbl_users as U')
-                ->select('U.id', 'U.user_id', 'U.name', 'contact_no', 'address', 'grade')
+                ->select('U.user_id', 'U.name', 'contact_no', 'address', 'grade')
                 ->leftJoin('tbl_grade AS G', 'G.user_id', '=', 'U.user_id')
                 ->where('user_type', 2)
                 ->where('archive_status', 0)
@@ -222,7 +222,7 @@ class UserCtr extends Controller
     public function getTeacherData()
     {
         return DB::table('tbl_users as U')
-                ->select('U.id', 'U.user_id', 'U.name', 'contact_no', 'address', 'department')
+                ->select('U.user_id', 'U.name', 'contact_no', 'address', 'department')
                 ->leftJoin('tbl_dept AS D', 'D.user_id', '=', 'U.user_id')
                 ->where('user_type', 1)
                 ->where('archive_status', 0)
